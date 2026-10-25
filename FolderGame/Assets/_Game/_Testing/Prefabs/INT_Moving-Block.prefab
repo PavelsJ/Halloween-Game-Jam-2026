@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2926349546826549967}
   m_Layer: 10
-  m_Name: INT_Default-Block
+  m_Name: INT_Moving-Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
