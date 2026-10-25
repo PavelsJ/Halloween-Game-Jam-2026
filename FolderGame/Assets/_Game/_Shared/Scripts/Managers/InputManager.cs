@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     [Header("Input Actions")]
     
     public bool PressInput { get; private set; }
+    public bool HoldInput { get; private set; }
     public bool ReleaseInput { get; private set; }
     public bool SelectInput { get; private set; }
     public Vector2 LookInput { get; private set; }
@@ -73,8 +74,10 @@ public class InputManager : MonoBehaviour
 
     private void UpdateInputs()
     {
-        PauseInput = pressAction.WasPressedThisFrame();
+        PressInput = pressAction.WasPressedThisFrame();
+        HoldInput = pressAction.IsPressed();
         ReleaseInput = pressAction.WasReleasedThisFrame();
+        
         SelectInput = selectAction.WasPressedThisFrame();
         
         PauseInput = pauseAction.WasPressedThisFrame();
@@ -91,6 +94,5 @@ public class InputManager : MonoBehaviour
         
         InteractInput = interactAction.WasPressedThisFrame();
         AttackInput = attackAction.WasPressedThisFrame();
-        PauseInput = pauseAction.WasPressedThisFrame();
     }
 }

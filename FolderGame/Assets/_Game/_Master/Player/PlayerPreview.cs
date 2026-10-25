@@ -6,6 +6,7 @@ public class PlayerPreview : MonoBehaviour
 {
     [Header("Preview Settings")]
     [SerializeField] SpriteRenderer previewRenderer;
+    [SerializeField] private LayerMask interactableLayer;
     private Vector3 targetPosition;
     
     [Header("Preview Shake")]
@@ -17,6 +18,7 @@ public class PlayerPreview : MonoBehaviour
     [Header("Preview Visual")]
     [SerializeField] private Sprite defaultPreviewSprite;
     [SerializeField] private Sprite pointPreviewSprite;
+    private bool isHoveringInteractable;
     
     [Header("Click Effect")]
     [SerializeField] private float darkenMultiplier = 0.7f;
@@ -45,7 +47,7 @@ public class PlayerPreview : MonoBehaviour
         if (previewRenderer == null || !previewRenderer.enabled) return;
         
         UpdatePosition(worldPos);
-        UpdateClickState();
+        CheckInteractable(worldPos);
         UpdateCursorVisual();
     }
 
@@ -54,15 +56,29 @@ public class PlayerPreview : MonoBehaviour
         targetPosition = worldPos;
         transform.position = targetPosition + shakeOffset;
     }
-    
-    private void UpdateClickState()
-    {
-        isClicking = InputManager.Instance.PressInput;
-    }
 
     private void UpdateCursorVisual()
     {
-        previewRenderer.color = isClicking ? new Color(darkenMultiplier, darkenMultiplier, darkenMultiplier, 1f) : Color.white;
+        previewRenderer.sprite = isHoveringInteractable ? pointPreviewSprite : defaultPreviewSprite;
+        
+        if (InputManager.Instance.PressInput)
+        {
+            previewRenderer.color = new Color(darkenMultiplier, darkenMultiplier, darkenMultiplier, 1f);
+        }
+        else if (InputManager.Instance.ReleaseInput)
+        {
+            previewRenderer.color = Color.white;
+        }
+    }
+    
+    private void CheckInteractable(Vector3 worldPos)
+    {
+        if (previewRenderer == null) return;
+
+        Collider2D hit = Physics2D.OverlapPoint(worldPos, interactableLayer);
+
+        IInteractable interactable = hit != null ? hit.GetComponent<IInteractable>() : null;
+        isHoveringInteractable = interactable != null && interactable.CanInteract();
     }
 
     public void ShowPreview(float newAlpha)

@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     // [Header("Landing")]
 
     [Header("Ground Check")]
-    [SerializeField] private float checkRadius = 0.2f;
+    [SerializeField] private Vector2 checkSize = new Vector2(0.5f, 0.1f);
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform ceilingCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -87,8 +87,8 @@ public class PlayerMovement : MonoBehaviour
 
         wasGrounded = isGrounded;
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer) != null;
-        isCeiling = Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer) != null;
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer) != null;
+        isCeiling = Physics2D.OverlapBox(ceilingCheck.position, checkSize, 0f, groundLayer) != null;
       
         if (wasGrounded && !isGrounded)
         {
@@ -239,4 +239,13 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = kinematic ? 0f : 1f;
     }
     
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        if (groundCheck != null)
+            Gizmos.DrawWireCube(groundCheck.position, checkSize);
+        
+        if (ceilingCheck != null)
+            Gizmos.DrawWireCube(ceilingCheck.position, checkSize);
+    }
 }

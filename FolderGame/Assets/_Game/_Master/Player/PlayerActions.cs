@@ -4,10 +4,13 @@ using UnityEngine.EventSystems;
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] PlayerPreview playerPreview;
+    [SerializeField] private LayerMask interactableLayer;
     
     private PlayerController playerController;
     private PlayerStats playerStats;
     private Camera playerCamera;
+    
+    private IInteractable currentInteractable;
 
     private void Start()
     {
@@ -37,22 +40,59 @@ public class PlayerActions : MonoBehaviour
                 return;
             }
 
-            Apply(worldPos);
+            CheckInteractable(worldPos);
+        }
+
+        if (currentInteractable == null) return;
+        
+        if (InputManager.Instance.HoldInput)
+        {
+            if (currentInteractable.CanInteract())
+            {
+                currentInteractable.Interact(worldPos);
+            }
+            else
+            {
+                playerPreview.ShakePreview(0.2f);
+            }
+        }
+        else if (InputManager.Instance.ReleaseInput)
+        {
+            IInteractable interactable = GetInteractable(worldPos);
+            
+            if (interactable == null)
+            {
+                currentInteractable.Cancel();
+            }
+            else
+            {
+                currentInteractable.Release();
+            }
+          
+            currentInteractable = null;
         }
     }
 
-    private void Apply(Vector3 worldPos)
+    private void CheckInteractable(Vector3 worldPos)
     {
-        
+        IInteractable interactable = GetInteractable(worldPos);
+        if (interactable == null) return;
+
+        if (interactable.CanInteract())
+        {
+            currentInteractable = interactable;
+            interactable.Interact(worldPos);
+        }
+        else
+        {
+            playerPreview.ShakePreview(0.2f);
+        }
     }
 
-    public void TickFixedUpdate()
+    private IInteractable GetInteractable(Vector3 worldPos)
     {
-        if (playerCamera == null) return;
-        
-        Vector3 mouseWorld = playerCamera.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorld.z = 0f;
-            
-        playerPreview.UpdatePreview(mouseWorld);
+        Collider2D hit = Physics2D.OverlapPoint(worldPos, interactableLayer);
+        IInteractable interactable = hit != null ? hit.GetComponent<IInteractable>() : null;
+        return interactable;
     }
 }

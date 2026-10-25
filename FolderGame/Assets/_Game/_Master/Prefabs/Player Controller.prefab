@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9460864, b: 0.43867922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -160,8 +160,8 @@ MonoBehaviour:
   groundAcceleration: 80
   groundDeceleration: 150
   airAcceleration: 100
-  coyoteTime: 0.2
-  checkRadius: 0.25
+  coyoteTime: 0.1
+  checkSize: {x: 1, y: 0.2}
   groundCheck: {fileID: 6830001383836580564}
   ceilingCheck: {fileID: 5392979362155901564}
   groundLayer:
@@ -181,6 +181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPreview: {fileID: 0}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!61 &2405183130090020011
 BoxCollider2D:
   m_ObjectHideFlags: 0
