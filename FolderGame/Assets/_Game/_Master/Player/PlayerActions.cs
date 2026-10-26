@@ -89,10 +89,24 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+  
     private IInteractable GetInteractable(Vector3 worldPos)
     {
-        Collider2D hit = Physics2D.OverlapPoint(worldPos, interactableLayer);
-        IInteractable interactable = hit != null ? hit.GetComponent<IInteractable>() : null;
-        return interactable;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(worldPos, 0.2f, interactableLayer);
+
+        if (hits.Length == 0) return null;
+
+        System.Array.Sort(hits, (a, b) =>
+        {
+            SpriteRenderer spriteA = a.GetComponent<SpriteRenderer>();
+            SpriteRenderer spriteB = b.GetComponent<SpriteRenderer>();
+
+            int orderA = spriteA != null ? spriteA.sortingOrder : 0;
+            int orderB = spriteB != null ? spriteB.sortingOrder : 0;
+
+            return orderB.CompareTo(orderA);
+        });
+
+        return hits[0].GetComponent<IInteractable>();
     }
 }

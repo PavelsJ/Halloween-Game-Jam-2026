@@ -161,7 +161,7 @@ MonoBehaviour:
   groundDeceleration: 150
   airAcceleration: 100
   coyoteTime: 0.1
-  checkSize: {x: 1, y: 0.2}
+  checkSize: {x: 0.9, y: 0.2}
   groundCheck: {fileID: 6830001383836580564}
   ceilingCheck: {fileID: 5392979362155901564}
   groundLayer:
@@ -244,8 +244,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 50
   m_LinearDamping: 0
-  m_AngularDamping: 0.01
-  m_GravityScale: 1
+  m_AngularDamping: 0.1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

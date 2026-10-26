@@ -4,16 +4,18 @@ public class Interactable : MonoBehaviour, IInteractable
 {
     public bool IsUsed { get; set; }
     
-    [SerializeField] internal GameObject parentBlock;
+    internal BlockController parentBlock;
     
     [Header("Click Effect")]
     [SerializeField] internal SpriteRenderer spriteRenderer;
     [SerializeField] internal float darkenMultiplier = 0.2f;
     internal Color baseColor;
 
-    private void Start()
+    public virtual void Init(BlockController blockController)
     {
-        if(spriteRenderer != null)
+        parentBlock =  blockController;
+            
+        if (spriteRenderer != null)
             baseColor = spriteRenderer.color;
     }
     
@@ -24,12 +26,16 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public virtual void Interact(Vector3 worldPos)
     {
+        parentBlock.BringToFront();
+        
         if (spriteRenderer != null)
             spriteRenderer.color = new Color(baseColor.r * darkenMultiplier, baseColor.g * darkenMultiplier, baseColor.b * darkenMultiplier, baseColor.a);
     }
 
     public virtual void Release()
     {
+        parentBlock.BringToFront();
+        
         if (spriteRenderer != null)
             spriteRenderer.color = baseColor;
     }
@@ -38,6 +44,12 @@ public class Interactable : MonoBehaviour, IInteractable
     {
         if (spriteRenderer != null)
             spriteRenderer.color = baseColor;
+    }
+
+    public virtual void SetLayer(int layer)
+    {
+        if (spriteRenderer != null)
+            spriteRenderer.sortingOrder = layer;
     }
 
     public virtual void ShowInfoUI()

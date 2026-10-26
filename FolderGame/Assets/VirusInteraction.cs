@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class VirusInteraction : MonoBehaviour
+public class VirusInteraction : Interactable
 {
     [SerializeField] private float damage;
 
@@ -18,6 +18,11 @@ public class VirusInteraction : MonoBehaviour
     private void Awake()
     {
         originalPosition = transform.localPosition;
+    }
+    
+    public override bool CanInteract()
+    {
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
