@@ -19,6 +19,7 @@ public class PlayerPreview : MonoBehaviour
     [SerializeField] private Sprite defaultPreviewSprite;
     [SerializeField] private Sprite pointPreviewSprite;
     private bool isHoveringInteractable;
+    private IInteractable currentInteractable;
     
     [Header("Click Effect")]
     [SerializeField] private float darkenMultiplier = 0.7f;
@@ -35,6 +36,10 @@ public class PlayerPreview : MonoBehaviour
     private void OnDisable()
     {
         Cursor.visible = true;
+
+        currentInteractable?.HideInfoUI();
+        currentInteractable = null;
+        isHoveringInteractable = false;
     }
 
     private void Start()
@@ -78,7 +83,13 @@ public class PlayerPreview : MonoBehaviour
         Collider2D hit = Physics2D.OverlapPoint(worldPos, interactableLayer);
 
         IInteractable interactable = hit != null ? hit.GetComponent<IInteractable>() : null;
-        isHoveringInteractable = interactable != null && interactable.CanInteract();
+        if (currentInteractable == interactable) return;
+        currentInteractable?.HideInfoUI();
+
+        currentInteractable = interactable;
+        isHoveringInteractable = currentInteractable != null;
+        
+        currentInteractable?.ShowInfoUI();
     }
 
     public void ShowPreview(float newAlpha)

@@ -11,16 +11,25 @@ public class Interactable : MonoBehaviour, IInteractable
     [SerializeField] internal float darkenMultiplier = 0.2f;
     internal Color baseColor;
 
-    public virtual void Init(BlockController blockController)
+    public virtual void Init(BlockController blockController, Material currentMaterial)
     {
         parentBlock =  blockController;
-            
+
         if (spriteRenderer != null)
+        {
+            spriteRenderer.material = currentMaterial;
             baseColor = spriteRenderer.color;
+        }
+        
+        parentBlock.SetOutline(false);
     }
     
     public virtual bool CanInteract()
     {
+        if (IsUsed)
+        {
+            return true;
+        }
         return !IsUsed;
     }
 
@@ -54,11 +63,11 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public virtual void ShowInfoUI()
     {
-       
+        parentBlock.SetOutline(true);
     }
 
     public virtual void HideInfoUI()
     {
-        
+        parentBlock.SetOutline(false);
     }
 }
