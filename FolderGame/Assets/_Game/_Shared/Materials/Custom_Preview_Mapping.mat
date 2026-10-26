@@ -34,13 +34,27 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1
+    - _BorderBlur: 0.025
+    - _BorderBlurAmount: 0.05
+    - _BorderGradientWidth: 0.05
     - _BorderWidth: 0.05
     - _Direction: 315
     - _EdgeSmoothness: 0.0365
     - _EnableExternalAlpha: 0
+    - _FilmDust: 0.572
+    - _FilmFlicker: 0.1
+    - _FilmGrain: 0.2
+    - _FilmGrainScale: 50
+    - _FilmScratches: 0.75
+    - _FilmSpeed: 12
     - _GapWidth: 0.01
     - _RedThreshold: 0.8
     - _RedTransparent: 0
+    - _ShoopEnabled: 0.219
+    - _ShoopIntensity: 1.36
+    - _ShoopSoftness: 0.156
+    - _ShoopSpeed: 1
+    - _ShoopWidth: 0.06
     - _Speed: 1
     - _StripeAngle: 129
     - _StripeGap: 1.31
@@ -49,10 +63,12 @@ Material:
     - _StripeWidth: 0.5
     m_Colors:
     - _BorderColor: {r: 1, g: 0.69387203, b: 0, a: 1}
+    - _BorderInnerColor: {r: 0, g: 0, b: 0, a: 1}
     - _ColorA: {r: 1, g: 0.69612426, b: 0, a: 0.50980395}
     - _ColorB: {r: 0, g: 0, b: 0, a: 0.50980395}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShoopColor: {r: 1, g: 1, b: 1, a: 1}
     - _StripeColorA: {r: 0, g: 0, b: 0, a: 0.8}
     - _StripeColorB: {r: 1, g: 0.8, b: 0, a: 0.8}
   m_BuildTextureStacks: []

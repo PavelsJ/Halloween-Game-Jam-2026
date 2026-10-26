@@ -35,6 +35,8 @@ public class VirusInteraction : Interactable
 
                 player.TakeDamage(hitDirection, damage, 200);
                 
+                CameraManager.Instance.ShakeCamera(shakeDuration, 0.05f);
+                
                 if (!canShake) return;
                 if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
                 shakeCoroutine = StartCoroutine(Shake());

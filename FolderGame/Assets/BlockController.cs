@@ -12,7 +12,7 @@ public class BlockController : MonoBehaviour
     [Header("Block Visual")]
     [SerializeField] private SpriteRenderer outline;
     [SerializeField] private Material hitMaterial;
-    [SerializeField] private float flashTime = 1f;
+    [SerializeField] private float flashTime = 0.5f;
     [SerializeField] private AnimationCurve flashCurve;
     
     private Material currentMaterial;
@@ -32,7 +32,10 @@ public class BlockController : MonoBehaviour
             if (i != null)
                 i.Init(this, currentMaterial);
         }
-        
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(FlashCoroutine());
     }
 
@@ -72,6 +75,9 @@ public class BlockController : MonoBehaviour
     {
         float currentFlashAmount = 0;
         float elapsedTime = 0;
+        
+        yield return null;
+        
         while (elapsedTime < flashTime)
         {
             elapsedTime += Time.deltaTime;

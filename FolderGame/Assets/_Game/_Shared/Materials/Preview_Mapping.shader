@@ -18,6 +18,7 @@ Shader "Custom/Preview_Mapping"
 
         [HDR] _BorderColor ("Inner Border Color", Color) = (1, 0, 0, 1)
         _BorderWidth ("Inner Border Width", Range(0.001, 0.2)) = 0.03
+        _BorderBlur ("Inner Border Blur", Range(0.001, 0.1)) = 0.025
 
         [HideInInspector] _RendererColor ("Renderer Color", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
@@ -36,7 +37,7 @@ Shader "Custom/Preview_Mapping"
             "CanUseSpriteAtlas" = "True"
         }
 
-        ZWrite On
+        ZWrite Off
         ZTest LEqual
         Blend One OneMinusSrcAlpha
 
@@ -86,6 +87,7 @@ Shader "Custom/Preview_Mapping"
 
                 float4 _BorderColor;
                 float _BorderWidth;
+                float _BorderBlur;
             CBUFFER_END
 
             Varyings vert(Attributes v)
@@ -113,39 +115,35 @@ Shader "Custom/Preview_Mapping"
                 // Preserve the sprite's existing transparency.
                 half alpha = sprite.a * i.color.a;
 
-                // Static inner border.
-                // Assumes the sprite UV range is 0..1.
+                // Distance to the nearest UV edge.
                 float2 borderDist = min(i.uv, 1.0 - i.uv);
+
                 float distanceToEdge = min(
                     borderDist.x,
                     borderDist.y
                 );
 
-                float aa = max(
-                    fwidth(distanceToEdge),
-                    0.0001
-                );
+                // Anti-aliasing.
+                float aa = max(fwidth(distanceToEdge), 0.0001);
 
+                // Gradient transition from the border towards the center.
+                float borderStart = max(0.0, _BorderWidth - aa);
+                float borderEnd = _BorderWidth + max(_BorderBlur, 0.001);
+
+                // 1 at the edge, gradually fading to 0 inward.
                 float borderMask = 1.0 - smoothstep(
-                    _BorderWidth - aa,
-                    _BorderWidth + aa,
+                    borderStart,
+                    borderEnd,
                     distanceToEdge
                 );
 
-                // Draw the border only where the sprite is visible.
-                if (borderMask > 0.5 && alpha > 0.001)
-                {
-                    half4 result;
+                // Premultiplied alpha for the border.
+                float borderAlpha = alpha * borderMask * _BorderColor.a;
 
-                    result.a = alpha * _BorderColor.a;
-                    result.rgb = _BorderColor.rgb
-                        * i.color.rgb
-                        * result.a;
+                float3 borderRGB =
+                    _BorderColor.rgb * i.color.rgb * borderAlpha;
+                
 
-                    return result;
-                }
-
-                // Calculate the animated pattern in world space.
                 float angle = radians(_Direction);
 
                 float2 direction = float2(
@@ -156,7 +154,7 @@ Shader "Custom/Preview_Mapping"
                 float distanceAlongPattern =
                     dot(i.worldPos, direction) - _Time.y * _Speed;
 
-                // Each stripe is followed by a transparent gap.
+                // Stripe and gap period.
                 float period = max(
                     _StripeWidth + _GapWidth,
                     0.001
@@ -165,7 +163,7 @@ Shader "Custom/Preview_Mapping"
                 float positionInPeriod =
                     frac(distanceAlongPattern / period) * period;
 
-                // Anti-alias the stripe edges.
+                // Anti-aliased stripe edges.
                 float stripeEdge = min(
                     positionInPeriod,
                     _StripeWidth - positionInPeriod
@@ -182,7 +180,7 @@ Shader "Custom/Preview_Mapping"
                     stripeEdge
                 );
 
-                // Alternate between the two stripe colors.
+                // Alternate stripe colors.
                 float stripeIndex = floor(
                     distanceAlongPattern / period
                 );
@@ -198,16 +196,20 @@ Shader "Custom/Preview_Mapping"
                     colorSelector
                 );
 
-                // Transparent gaps; only the stripes are visible.
-                half4 finalColor;
-
-                finalColor.a =
+                // Premultiplied alpha for stripes.
+                float stripeAlpha =
                     alpha * stripeMask * stripeColor.a * _Alpha;
 
-                finalColor.rgb =
-                    stripeColor.rgb * i.color.rgb * finalColor.a;
+                float3 stripeRGB =
+                    stripeColor.rgb * i.color.rgb * stripeAlpha;
 
-                return finalColor;
+                float outAlpha = borderAlpha
+                    + stripeAlpha * (1.0 - borderAlpha);
+
+                float3 outRGB = borderRGB
+                    + stripeRGB * (1.0 - borderAlpha);
+
+                return half4(outRGB, outAlpha);
             }
 
             ENDHLSL

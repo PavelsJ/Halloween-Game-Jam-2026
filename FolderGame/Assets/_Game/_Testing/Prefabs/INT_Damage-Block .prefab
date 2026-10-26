@@ -264,6 +264,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c8aa2e5758f304ba8b83362bb221fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  showInfo: 0
   spriteRenderer: {fileID: 360958596658361167}
   darkenMultiplier: 0.9
   damage: 10

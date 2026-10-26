@@ -16,8 +16,9 @@ Material:
   - ETC1_EXTERNAL_ALPHA
   - _CONNECTEDALPHA_ON
   - _FRAMEMODE_GENERAL
+  - _OUTLINEENABLED_ON
   - _OUTLINEMODE_SOLID
-  - _OUTLINEPOSITION_OUTSIDE
+  - _OUTLINEPOSITION_INSIDE_OVER_SPRITE
   - _OUTLINESHAPE_CONTOUR
   - _TILEMODE_STRETCH
   m_LightmapFlags: 4
@@ -52,7 +53,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _FrameTex:
         m_Texture: {fileID: 2800000, guid: 35f23c48db908de47a926c4bb1831818, type: 3}
-        m_Scale: {x: 3.76, y: 1}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
@@ -87,19 +88,19 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineEnabled: 0
+    - _OutlineEnabled: 1
     - _OutlineMode: 0
-    - _OutlinePosition: 2
+    - _OutlinePosition: 1
     - _OutlineShape: 0
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpriteOverlay: 0
     - _SrcBlend: 1
-    - _Thickness: 100
+    - _Thickness: 109.7
     - _TileMode: 0
     - _UVSec: 0
-    - _Weight: 0.5
+    - _Weight: 1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
