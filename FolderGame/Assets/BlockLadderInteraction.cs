@@ -14,10 +14,7 @@ public class BlockLadderInteraction : BlockCloseInteraction
     
     public override void Interact(Vector3 worldPos)
     {
-        parentBlock.BringToFront();
-        
-        if (spriteRenderer != null)
-            spriteRenderer.color = new Color(baseColor.r * darkenMultiplier, baseColor.g * darkenMultiplier, baseColor.b * darkenMultiplier, baseColor.a);
+       base.Interact(worldPos);
     }
 
     public override void Release()
@@ -35,15 +32,19 @@ public class BlockLadderInteraction : BlockCloseInteraction
             
         if (spriteRenderer != null)
             spriteRenderer.color = baseColor;
+        
+        if (onRelease != null)
+            onRelease.Invoke();
             
         currentLadderAmount--;
     }
 
     public void UpdateLadder(BlockController controller)
     {
-        Debug.Log($"UpdateLadder called. Remaining: {currentLadderAmount}");
-        
-        if (currentLadderAmount <= 0) return;
+        if (currentLadderAmount <= 0)
+        {
+            return;
+        }
         
         GameObject block = Instantiate(newBlock, controller.transform.localPosition + new Vector3(0.25f, 0.25f), Quaternion.identity);
         SubBlockRelay relay = block.GetComponentInChildren<SubBlockRelay>();

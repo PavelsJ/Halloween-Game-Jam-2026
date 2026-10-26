@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour, IInteractable
 {
@@ -6,7 +7,12 @@ public class Interactable : MonoBehaviour, IInteractable
     
     internal BlockController parentBlock;
     
-    [Header("Click Effect")]
+    [Header("Click Actions")]
+    [SerializeField] protected UnityEvent onInteract;
+    [SerializeField] protected UnityEvent onRelease;
+
+    [Header("Click Effect")] 
+    [SerializeField] private bool showInfo = true;
     [SerializeField] internal SpriteRenderer spriteRenderer;
     [SerializeField] internal float darkenMultiplier = 0.2f;
     internal Color baseColor;
@@ -39,6 +45,9 @@ public class Interactable : MonoBehaviour, IInteractable
         
         if (spriteRenderer != null)
             spriteRenderer.color = new Color(baseColor.r * darkenMultiplier, baseColor.g * darkenMultiplier, baseColor.b * darkenMultiplier, baseColor.a);
+        
+        if (onInteract != null)
+            onInteract.Invoke();
     }
 
     public virtual void Release()
@@ -47,6 +56,9 @@ public class Interactable : MonoBehaviour, IInteractable
         
         if (spriteRenderer != null)
             spriteRenderer.color = baseColor;
+        
+        if (onRelease != null)
+            onRelease.Invoke();
     }
 
     public virtual void Cancel()
@@ -63,11 +75,13 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public virtual void ShowInfoUI()
     {
-        parentBlock.SetOutline(true);
+        if (showInfo)
+            parentBlock.SetOutline(true);
     }
 
     public virtual void HideInfoUI()
     {
-        parentBlock.SetOutline(false);
+        if (showInfo) 
+            parentBlock.SetOutline(false);
     }
 }

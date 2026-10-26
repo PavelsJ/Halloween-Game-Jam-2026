@@ -16,9 +16,10 @@ public class SubBlockRelay : BlockCloseInteraction
         if (ladderParent ==null) return;
         ladderParent.UpdateLadder(parentBlock);
         
-        Debug.Log("SubBlockRelay.Release()");
-        
         if (spriteRenderer != null)
             spriteRenderer.color = baseColor;
+        
+        if (onRelease != null)
+            onRelease.Invoke();
     }
 }

@@ -4,7 +4,12 @@ using UnityEngine.EventSystems;
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] PlayerPreview playerPreview;
+    
     [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private LayerMask blockLayer;
+    
+    private Vector3 lastValidMousePosition;
+    private bool mousePositionInitialized;
     
     private PlayerController playerController;
     private PlayerStats playerStats;
@@ -28,9 +33,25 @@ public class PlayerActions : MonoBehaviour
         if (playerCamera == null) return;
         
         Vector3 screenPos = Input.mousePosition;
+
+        if (!mousePositionInitialized)
+        {
+            lastValidMousePosition = screenPos;
+            mousePositionInitialized = true;
+        }
+        
         Vector3 worldPos = playerCamera.ScreenToWorldPoint(screenPos);
         worldPos.z = 0f;
-
+        
+        if (Physics2D.OverlapCircle(worldPos, 0.1f, blockLayer))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            
+            UnityEngine.InputSystem.Mouse.current.WarpCursorPosition(lastValidMousePosition);
+            return;
+        }
+        
+        lastValidMousePosition = screenPos;
         playerPreview.UpdatePreview(worldPos);
         
         if (InputManager.Instance.PressInput)
