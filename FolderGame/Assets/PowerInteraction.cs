@@ -1,23 +1,20 @@
 using UnityEngine;
 
-public class PowerInteraction : Interactable
+public class PowerInteraction : MonoBehaviour
 {
     [SerializeField] private string nextSceneName;
-    
-    public override bool CanInteract()
-    {
-        return false;
-    }
+    private bool isUsed;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (IsUsed) return;
+        if (isUsed) return;
         
         if (other.gameObject.CompareTag("Player"))
         {
-            LoadManager.Instance.OpenScene(nextSceneName);
+            InventoryManager.Instance.SaveInventory();
             CameraManager.Instance.ShakeCameraIncreasing(1, 0.5f);
-            IsUsed = true;
+            LoadManager.Instance.OpenScene(nextSceneName);
+            isUsed = true;
         }
     }
 }

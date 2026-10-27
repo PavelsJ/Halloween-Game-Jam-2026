@@ -44,4 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41b5607082fdb942adf6c6287a146f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  allItemData:
+  - {fileID: 11400000, guid: a1478defcc90a164883a059d0ac0d8e6, type: 2}
+  itemSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

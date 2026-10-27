@@ -1,30 +1,29 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour, IInteractable
 {
     public bool IsUsed { get; set; }
     
     internal BlockController parentBlock;
+    internal Button button;
     
     [Header("Click Actions")]
     [SerializeField] protected UnityEvent onInteract;
     [SerializeField] protected UnityEvent onRelease;
 
     [Header("Click Effect")] 
-    [SerializeField] private bool showInfo = true;
-    [SerializeField] internal SpriteRenderer spriteRenderer;
-    [SerializeField] internal float darkenMultiplier = 0.2f;
-    internal Color baseColor;
-
+    [SerializeField] internal Image image;
+    [SerializeField] private bool showOutline = true;
+    
     public virtual void Init(BlockController blockController, Material currentMaterial)
     {
         parentBlock =  blockController;
 
-        if (spriteRenderer != null)
+        if (image != null)
         {
-            spriteRenderer.material = currentMaterial;
-            baseColor = spriteRenderer.color;
+            image.material = currentMaterial;
         }
         
         parentBlock.SetOutline(false);
@@ -43,9 +42,6 @@ public class Interactable : MonoBehaviour, IInteractable
     {
         parentBlock.BringToFront();
         
-        if (spriteRenderer != null)
-            spriteRenderer.color = new Color(baseColor.r * darkenMultiplier, baseColor.g * darkenMultiplier, baseColor.b * darkenMultiplier, baseColor.a);
-        
         if (onInteract != null)
             onInteract.Invoke();
     }
@@ -54,34 +50,22 @@ public class Interactable : MonoBehaviour, IInteractable
     {
         parentBlock.BringToFront();
         
-        if (spriteRenderer != null)
-            spriteRenderer.color = baseColor;
-        
         if (onRelease != null)
             onRelease.Invoke();
     }
 
     public virtual void Cancel()
     {
-        if (spriteRenderer != null)
-            spriteRenderer.color = baseColor;
-    }
-
-    public virtual void SetLayer(int layer)
-    {
-        if (spriteRenderer != null)
-            spriteRenderer.sortingOrder = layer;
+        parentBlock.BringToFront();
     }
 
     public virtual void ShowInfoUI()
     {
-        if (showInfo)
-            parentBlock.SetOutline(true);
+        if (showOutline) parentBlock.SetOutline(true);
     }
 
     public virtual void HideInfoUI()
     {
-        if (showInfo) 
-            parentBlock.SetOutline(false);
+        if (showOutline) parentBlock.SetOutline(false);
     }
 }

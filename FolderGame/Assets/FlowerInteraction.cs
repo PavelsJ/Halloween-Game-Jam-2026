@@ -1,23 +1,37 @@
+using System.Collections;
 using UnityEngine;
 
-public class FlowerInteraction : Interactable
+public class FlowerInteraction : MonoBehaviour
 {
     [SerializeField] private ItemData flowerData;
+    private bool isUsed;
     
-    public override bool CanInteract()
+    private IEnumerator Start()
     {
-        return false;
+        yield return new WaitForSeconds(0.1f);
+        
+        if (flowerData == null || InventoryManager.Instance == null) yield break;
+
+        foreach (ItemData item in InventoryManager.Instance.Items)
+        {
+            if (item != null && item.ItemID == flowerData.ItemID)
+            {
+                isUsed = true;
+                gameObject.SetActive(false);
+                yield break;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (IsUsed) return;
+        if (isUsed) return;
         if (other.gameObject.CompareTag("Player"))
         {
             InventoryManager.Instance.AddItem(flowerData);
-            IsUsed = true;
+            isUsed = true;
             
-            parentBlock.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

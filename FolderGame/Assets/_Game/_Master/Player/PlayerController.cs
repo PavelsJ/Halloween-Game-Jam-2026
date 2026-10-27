@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     
     public PlayerMovement Movement { get; private set; }
     public PlayerActions Action { get; private set; }
+    public PlayerInteraction Interaction { get; private set; }
+    public PlayerVisual Visual { get; private set; }
     public PlayerStats Stats { get; private set; }
     
     [Header("Death Actions")]
@@ -28,13 +30,18 @@ public class PlayerController : MonoBehaviour
     {
         Movement = GetComponent<PlayerMovement>();
         Action = GetComponent<PlayerActions>();
+        Interaction = GetComponent<PlayerInteraction>();
+        Visual = GetComponent<PlayerVisual>();
         
         if (playerData != null)
             runtimeData = Instantiate(playerData); 
         
         Stats = new PlayerStats(runtimeData);
+        
         Movement.Init(this);
         Action.Init(this);
+        Interaction.Init(this);
+        Visual.Init(this);
     }
 
     private void Update()
@@ -49,6 +56,7 @@ public class PlayerController : MonoBehaviour
         if (isActive)
         {
             Action.TickUpdate();
+            Interaction.TickUpdate();
         }
     }
 
@@ -105,13 +113,13 @@ public class PlayerController : MonoBehaviour
 
         if (!Stats.HasHealth)
         {
-            KillPlayer(hitDirection);
+            KillPlayer();
         }
         
         Movement.ApplyKnockback(hitDirection, knockbackForce);
     }
     
-    private void KillPlayer(Vector3 hitDirection)
+    private void KillPlayer()
     {
         isDead = true;
         

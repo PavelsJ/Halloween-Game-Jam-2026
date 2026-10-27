@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -257848391
   m_SortingLayer: 2
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -257848391
   m_SortingLayer: 2
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -183,7 +183,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6551565049524378030}
-  - component: {fileID: 3243585922361878650}
   - component: {fileID: 2800049731655965269}
   m_Layer: 10
   m_Name: INT_Power-Block
@@ -210,47 +209,6 @@ Transform:
   - {fileID: 4423037472696231180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3243585922361878650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325555826416546227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26c7a9c8fca3184f960073e86f483e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interaction:
-  - {fileID: 1441460169417487079}
-  outline: {fileID: 5789472702301734674}
-  hitMaterial: {fileID: 2100000, guid: 8226369e227751544ab58b7c08116555, type: 2}
-  flashTime: 0.5
-  flashCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -4.614523
-      outSlope: -4.614523
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.0813487
-    - serializedVersion: 3
-      time: 0.5
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &2800049731655965269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +239,7 @@ GameObject:
   - component: {fileID: 1441460169417487079}
   - component: {fileID: 8947168763417145346}
   - component: {fileID: 1296768358774605741}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Block-Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +304,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -257848391
   m_SortingLayer: 2
-  m_SortingOrder: 5
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.46666667, g: 0.9647059, b: 1, a: 1}
   m_FlipX: 0
@@ -370,15 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cd8dce9530d4b4b8699d73d89dcad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  onRelease:
-    m_PersistentCalls:
-      m_Calls: []
-  showInfo: 0
-  spriteRenderer: {fileID: 3948506339200739505}
-  darkenMultiplier: 0.9
   nextSceneName: 
 --- !u!61 &8947168763417145346
 BoxCollider2D:

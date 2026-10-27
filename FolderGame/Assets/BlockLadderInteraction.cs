@@ -29,9 +29,6 @@ public class BlockLadderInteraction : BlockCloseInteraction
         if (relay == null) return;
         relay.SetLadder(this);
         relay.parentBlock.BringToFront();
-            
-        if (spriteRenderer != null)
-            spriteRenderer.color = baseColor;
         
         if (onRelease != null)
             onRelease.Invoke();

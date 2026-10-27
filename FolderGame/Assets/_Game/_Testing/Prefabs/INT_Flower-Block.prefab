@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6679678436470424918}
-  - component: {fileID: 8651577677049004204}
   - component: {fileID: 366658310664815328}
   m_Layer: 10
   m_Name: INT_Flower-Block
@@ -35,47 +34,6 @@ Transform:
   - {fileID: 8134282205269182209}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8651577677049004204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5761367742989634926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26c7a9c8fca3184f960073e86f483e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interaction:
-  - {fileID: 3722229728820290414}
-  outline: {fileID: 4004730119585439563}
-  hitMaterial: {fileID: 2100000, guid: 8226369e227751544ab58b7c08116555, type: 2}
-  flashTime: 0.5
-  flashCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -4.614523
-      outSlope: -4.614523
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.0813487
-    - serializedVersion: 3
-      time: 0.5
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &366658310664815328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -257848391
   m_SortingLayer: 2
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -258,7 +216,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -257848391
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.51921684, g: 0.99607843, b: 0.21568629, a: 1}
   m_FlipX: 0
@@ -282,15 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5d93c365eb5fb43bca07694b9e5880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  onRelease:
-    m_PersistentCalls:
-      m_Calls: []
-  showInfo: 0
-  spriteRenderer: {fileID: 4541327219454735098}
-  darkenMultiplier: 0.9
   flowerData: {fileID: 11400000, guid: a1478defcc90a164883a059d0ac0d8e6, type: 2}
 --- !u!61 &2933184254522006215
 BoxCollider2D:

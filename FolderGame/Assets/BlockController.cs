@@ -6,8 +6,9 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
     [Header("Block Settings")]
+    [SerializeField] private Canvas canvas;
     [SerializeField] private List<Interactable> interaction;
-    public int LayerCount => interaction.Count;
+    public int LayerCount => 1;
 
     [Header("Block Visual")]
     [SerializeField] private SpriteRenderer outline;
@@ -57,13 +58,7 @@ public class BlockController : MonoBehaviour
 
     public void SortLayers(int index)
     {
-        foreach (Interactable i in interaction)
-        {
-            if (i == null) continue;
-
-            i.SetLayer(index);
-            index++;
-        }
+        canvas.sortingOrder = index;
     }
 
     public void BringToFront()

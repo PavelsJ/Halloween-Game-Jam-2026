@@ -53,9 +53,6 @@ public class PlayerMovement : MonoBehaviour
     
     public float CurrentSpeed => new Vector2(rb.linearVelocity.x, 0f).magnitude;
     
-    public event Action OnJumpStart;
-    public event Action OnJumpEnd;
-    
     public void Init(PlayerController player)
     {
         playerController = player;
@@ -162,14 +159,14 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         coyoteTimer = 0f;
 
+        playerController.Visual.PlayJumpParticles();
         rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode2D.Impulse);
-        OnJumpStart?.Invoke();
     }
 
     private void HandleLanding()
     {
+        playerController.Visual.PlayLandingParticles();
         isJumping = false;
-        OnJumpEnd?.Invoke();
     }
     
     public void ApplyKnockback(Vector3 hitDirection, float knockbackForce = 4f)
@@ -188,6 +185,7 @@ public class PlayerMovement : MonoBehaviour
         Stop();
         isKnockbacked = true;
         
+        playerController.Visual.PlayHitParticles();
         rb.AddForce(hitDirection.normalized * (playerStats.KnockbackMultiplier * knockbackForce), ForceMode2D.Impulse);
         
         yield return new WaitForSeconds(0.2f);

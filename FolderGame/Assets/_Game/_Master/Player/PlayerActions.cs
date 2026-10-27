@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] PlayerPreview playerPreview;
-    
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private LayerMask blockLayer;
     
@@ -13,6 +13,7 @@ public class PlayerActions : MonoBehaviour
     
     private PlayerController playerController;
     private PlayerStats playerStats;
+    
     private Camera playerCamera;
     
     private IInteractable currentInteractable;
@@ -46,7 +47,6 @@ public class PlayerActions : MonoBehaviour
         if (Physics2D.OverlapCircle(worldPos, 0.1f, blockLayer))
         {
             Cursor.lockState = CursorLockMode.None;
-            
             UnityEngine.InputSystem.Mouse.current.WarpCursorPosition(lastValidMousePosition);
             return;
         }
@@ -56,11 +56,6 @@ public class PlayerActions : MonoBehaviour
         
         if (InputManager.Instance.PressInput)
         {
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            {
-                return;
-            }
-
             CheckInteractable(worldPos);
         }
 
@@ -79,7 +74,7 @@ public class PlayerActions : MonoBehaviour
         }
         else if (InputManager.Instance.ReleaseInput)
         {
-            IInteractable interactable = GetInteractable(worldPos);
+            IInteractable interactable = GetInteractable();
             
             if (interactable == null)
             {
@@ -96,7 +91,7 @@ public class PlayerActions : MonoBehaviour
 
     private void CheckInteractable(Vector3 worldPos)
     {
-        IInteractable interactable = GetInteractable(worldPos);
+        IInteractable interactable = GetInteractable();
         if (interactable == null) return;
 
         if (interactable.CanInteract())
@@ -109,18 +104,40 @@ public class PlayerActions : MonoBehaviour
             playerPreview.ShakePreview(0.2f);
         }
     }
-
   
-    private IInteractable GetInteractable(Vector3 worldPos)
+    private IInteractable GetInteractable()
     {
+        if (EventSystem.current != null)
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            foreach (RaycastResult result in results)
+            {
+                IInteractable interactable =
+                    result.gameObject.GetComponentInParent<IInteractable>();
+
+                if (interactable != null)
+                    return interactable;
+            }
+        }
+        
+        Vector3 worldPos = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+        worldPos.z = 0f;
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(worldPos, 0.2f, interactableLayer);
 
         if (hits.Length == 0) return null;
 
         System.Array.Sort(hits, (a, b) =>
         {
-            SpriteRenderer spriteA = a.GetComponent<SpriteRenderer>();
-            SpriteRenderer spriteB = b.GetComponent<SpriteRenderer>();
+            SpriteRenderer spriteA = a.GetComponentInParent<SpriteRenderer>();
+            SpriteRenderer spriteB = b.GetComponentInParent<SpriteRenderer>();
 
             int orderA = spriteA != null ? spriteA.sortingOrder : 0;
             int orderB = spriteB != null ? spriteB.sortingOrder : 0;
@@ -128,6 +145,12 @@ public class PlayerActions : MonoBehaviour
             return orderB.CompareTo(orderA);
         });
 
-        return hits[0].GetComponent<IInteractable>();
+        foreach (Collider2D hit in hits)
+        {
+            IInteractable interactable = hit.GetComponentInParent<IInteractable>();
+            if (interactable != null) return interactable;
+        }
+
+        return null;
     }
 }

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerPreview : MonoBehaviour
 {
     [Header("Preview Settings")]
     [SerializeField] SpriteRenderer previewRenderer;
-    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] LayerMask interactableLayer;
     private Vector3 targetPosition;
     
     [Header("Preview Shake")]
@@ -79,17 +80,62 @@ public class PlayerPreview : MonoBehaviour
     private void CheckInteractable(Vector3 worldPos)
     {
         if (previewRenderer == null) return;
-
-        Collider2D hit = Physics2D.OverlapPoint(worldPos, interactableLayer);
-
-        IInteractable interactable = hit != null ? hit.GetComponent<IInteractable>() : null;
+        
+        IInteractable interactable = GetInteractable(worldPos);
         if (currentInteractable == interactable) return;
+
         currentInteractable?.HideInfoUI();
 
         currentInteractable = interactable;
         isHoveringInteractable = currentInteractable != null;
         
         currentInteractable?.ShowInfoUI();
+    }
+    
+    private IInteractable GetInteractable(Vector3 worldPos)
+    {
+        if (EventSystem.current != null)
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            foreach (RaycastResult result in results)
+            {
+                IInteractable interactable =
+                    result.gameObject.GetComponentInParent<IInteractable>();
+
+                if (interactable != null)
+                    return interactable;
+            }
+        }
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(worldPos, 0.2f, interactableLayer);
+
+        if (hits.Length == 0) return null;
+
+        System.Array.Sort(hits, (a, b) =>
+        {
+            SpriteRenderer spriteA = a.GetComponentInParent<SpriteRenderer>();
+            SpriteRenderer spriteB = b.GetComponentInParent<SpriteRenderer>();
+
+            int orderA = spriteA != null ? spriteA.sortingOrder : 0;
+            int orderB = spriteB != null ? spriteB.sortingOrder : 0;
+
+            return orderB.CompareTo(orderA);
+        });
+
+        foreach (Collider2D hit in hits)
+        {
+            IInteractable interactable = hit.GetComponentInParent<IInteractable>();
+            if (interactable != null) return interactable;
+        }
+
+        return null;
     }
 
     public void ShowPreview(float newAlpha)
