@@ -27,7 +27,8 @@ public class VirusInteraction: MonoBehaviour
             if (other.TryGetComponent(out PlayerController player))
             {
                 Vector2 hitDirection = new Vector2(other.transform.position.x - transform.position.x, 1).normalized;
-
+                
+                if(player.isDead || !player.isActive) return;
                 player.TakeDamage(hitDirection, damage, 200);
                 
                 CameraManager.Instance.ShakeCamera(shakeDuration, 0.05f);

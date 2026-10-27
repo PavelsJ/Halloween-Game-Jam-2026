@@ -24,6 +24,7 @@ public class BlockController : MonoBehaviour
         {
             Material newMaterial = outline.material;
             outline.material = new Material(newMaterial);
+            SetOutline(false);
         }
         
         currentMaterial = new Material(hitMaterial);

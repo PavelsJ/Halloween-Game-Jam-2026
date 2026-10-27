@@ -364,7 +364,7 @@ PrefabInstance:
     - target: {fileID: 6632790150202393127, guid: a9ab62511b845484ca4554c1814aa1f1, type: 3}
       propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 4811945909080111957}
+      objectReference: {fileID: 9061010651500419823}
     - target: {fileID: 6632790150202393127, guid: a9ab62511b845484ca4554c1814aa1f1, type: 3}
       propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -420,6 +420,14 @@ PrefabInstance:
     - target: {fileID: 6632790150202393127, guid: a9ab62511b845484ca4554c1814aa1f1, type: 3}
       propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632790150202393127, guid: a9ab62511b845484ca4554c1814aa1f1, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632790150202393127, guid: a9ab62511b845484ca4554c1814aa1f1, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6632790150202393127, guid: a9ab62511b845484ca4554c1814aa1f1, type: 3}
       propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
