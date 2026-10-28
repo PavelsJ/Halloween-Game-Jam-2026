@@ -10,17 +10,24 @@ public class BlockPlayInteraction : Interactable
     public virtual IEnumerator Start()
     {
         yield return null;
+
+        Reset();
+    }
+
+    public void Reset()
+    {
+        Sprite randomSprite = image.sprite;
         
         if (isRandom)
         {
-            if (adSprites.Length <= 0) yield break;
-            image.sprite = adSprites[Random.Range(0, adSprites.Length)];
+            if (adSprites.Length > 0) 
+                randomSprite = adSprites[Random.Range(0, adSprites.Length)];
         }
+      
+        image.sprite = randomSprite;
         
-        image.SetAllDirty();
-        image.rectTransform.ForceUpdateRectTransforms();
-
-        Canvas.ForceUpdateCanvases();
+        AutoImageAspectRatio aspectRatio = image.GetComponent<AutoImageAspectRatio>();
+        if (aspectRatio != null) aspectRatio.Init();
     }
     
     public override void Interact(Vector3 worldPos)

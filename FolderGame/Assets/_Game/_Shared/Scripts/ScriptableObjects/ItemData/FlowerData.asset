@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FlowerData
   m_EditorClassIdentifier: 
   itemID: 1
-  itemIcon: {fileID: 21300000, guid: 33e1e6147b08d6d4ab5a134dd49ed962, type: 3}
+  itemIcon: {fileID: -3135747642957486356, guid: 2e440c45301de30409083cfe53d70dff, type: 3}
   itemName: Flower 1
   itemDescription: Flower 1

@@ -3,13 +3,16 @@ using UnityEngine;
 public class BlockLadderInteraction : BlockCloseInteraction
 {
     [Header("Ladder Interaction")]
+    [SerializeField] private Vector3 direction = new Vector3(0.25f, 0.25f);
     [SerializeField] private int ladderAmount;
     [SerializeField] private GameObject newBlock;
     private int currentLadderAmount;
+    private Vector3 originPos;
 
     private void Start()
     {
         currentLadderAmount = ladderAmount;
+        originPos = parentBlock.transform.localPosition;
     }
     
     public override void Interact(Vector3 worldPos)
@@ -23,7 +26,7 @@ public class BlockLadderInteraction : BlockCloseInteraction
 
         if (currentLadderAmount <= 0) return;
         
-        GameObject block = Instantiate(newBlock, parentBlock.transform.localPosition + new Vector3(0.25f, 0.25f), Quaternion.identity);
+        GameObject block = Instantiate(newBlock, originPos + direction, Quaternion.identity);
         SubBlockRelay relay = block.GetComponentInChildren<SubBlockRelay>();
             
         if (relay == null) return;
@@ -43,7 +46,7 @@ public class BlockLadderInteraction : BlockCloseInteraction
             return;
         }
         
-        GameObject block = Instantiate(newBlock, controller.transform.localPosition + new Vector3(0.25f, 0.25f), Quaternion.identity);
+        GameObject block = Instantiate(newBlock, controller.transform.localPosition + direction, Quaternion.identity);
         SubBlockRelay relay = block.GetComponentInChildren<SubBlockRelay>();
                 
         if (relay == null) return;

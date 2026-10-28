@@ -81,6 +81,7 @@ public class BlockController : MonoBehaviour
             outline.material = new Material(newMaterial);
             SetOutline(false);
         }
+        
         currentMaterial = new Material(hitMaterial);
         
         foreach (Interactable i in interaction)
@@ -102,6 +103,14 @@ public class BlockController : MonoBehaviour
         yield return null;
         
         LayerManager.Instance.Register(this);
+    }
+    
+    public void Reset()
+    {
+        if (blockText != null)
+            blockText.text = trollMessages[Random.Range(0, trollMessages.Length)];
+        
+        StartCoroutine(FlashCoroutine());
     }
 
     private void OnDestroy()
@@ -125,7 +134,7 @@ public class BlockController : MonoBehaviour
     
     private IEnumerator FlashCoroutine()
     {
-        float currentFlashAmount = 0;
+        float currentFlashAmount = 1;
         float elapsedTime = 0;
         
         yield return null;
@@ -133,7 +142,7 @@ public class BlockController : MonoBehaviour
         while (elapsedTime < flashTime)
         {
             elapsedTime += Time.deltaTime;
-            currentFlashAmount = Mathf.Lerp(1, flashCurve.Evaluate(elapsedTime), elapsedTime / flashTime);
+            currentFlashAmount = Mathf.Lerp(0, flashCurve.Evaluate(elapsedTime), elapsedTime / flashTime);
             PlayFlash(currentFlashAmount);
             yield return null;
         }

@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78fb683b79732048bb94b284931e7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 1
   amplitude: 0.1
   cycleDuration: 4
   rotateSpeed: 4
@@ -328,7 +329,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cd8dce9530d4b4b8699d73d89dcad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Test_1
+  nextSceneName: lvl_2
+  hitMaterial: {fileID: 2100000, guid: 8226369e227751544ab58b7c08116555, type: 2}
+  flashTime: 0.5
+  flashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -4.614523
+      outSlope: -4.614523
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0813487
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!61 &8947168763417145346
 BoxCollider2D:
   m_ObjectHideFlags: 0

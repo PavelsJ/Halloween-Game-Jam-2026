@@ -45,11 +45,18 @@ public class BlockExplodeInteraction : BlockPlayInteraction
     {
         yield return null;
         
+        Sprite randomSprite = image.sprite;
+        
         if (isRandom)
         {
-            if (adSprites.Length <= 0) yield break;
-            image.sprite = adSprites[Random.Range(0, adSprites.Length)];
+            if (adSprites.Length > 0) 
+                randomSprite = adSprites[Random.Range(0, adSprites.Length)];
         }
+      
+        image.sprite = randomSprite;
+        
+        AutoImageAspectRatio aspectRatio = image.GetComponent<AutoImageAspectRatio>();
+        if (aspectRatio != null) aspectRatio.Init();
         
         isCounting = false;
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -37,8 +38,8 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator StartLevelCoroutine()
     {
-       
-        yield return StartCoroutine(SpawnPlatform(firstPlatform.GetComponent<BlockController>()));
+        BlockController firstController = firstPlatform.GetComponent<BlockController>();
+        if (firstController != null) yield return StartCoroutine(SpawnPlatform(firstController));
         
         List<GameObject> shuffledPlatforms = new List<GameObject>(platforms);
 
@@ -52,7 +53,9 @@ public class LevelManager : MonoBehaviour
         foreach (GameObject platform in shuffledPlatforms)
         {
             yield return new WaitForSeconds(spawnDelay);
-            StartCoroutine(SpawnPlatform(platform.GetComponent<BlockController>()));
+            
+            BlockController blockController = platform.GetComponent<BlockController>();
+            if (blockController != null) StartCoroutine(SpawnPlatform(blockController));
         }
     }
 
@@ -86,5 +89,7 @@ public class LevelManager : MonoBehaviour
         platformTransform.position = targetPosition;
         platform.GetMotion().StartMotion();
         platform.GetGround().enabled = true;
+        
+        CameraManager.Instance.ShakeCamera(0.1f, 0.2f);
     }
 }

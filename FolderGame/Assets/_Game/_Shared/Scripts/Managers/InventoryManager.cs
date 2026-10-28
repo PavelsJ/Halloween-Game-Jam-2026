@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -14,6 +15,13 @@ public class InventoryManager : MonoBehaviour
     
     public IReadOnlyList<ItemData> Items => items;
     private ItemSlot selectedSlot;
+    
+    [Header("Instruction Settings")]
+    [SerializeField] private float instructionTime = 5f;
+    [SerializeField] private GameObject instructionPanel;
+    [SerializeField] private TMP_Text instructionText;
+    
+    private Coroutine instructionCoroutine;
     
     private const string SaveKey = "InventorySave";
     
@@ -186,6 +194,10 @@ public class InventoryManager : MonoBehaviour
             if (slot.IsFilled) continue;
 
             slot.Init(newItem, itemIndex);
+            
+            if (instructionCoroutine != null) StopCoroutine(instructionCoroutine);
+            instructionCoroutine = StartCoroutine(ShowInstructionCoroutine(newItem));
+
             return;
         }
     }
@@ -220,5 +232,16 @@ public class InventoryManager : MonoBehaviour
         if (index < 0 || index >= items.Count) return null;
 
         return items[index];
+    }
+    
+    private IEnumerator ShowInstructionCoroutine(ItemData item)
+    {
+        instructionPanel.SetActive(true);
+        instructionText.text = $"New Item Added: {item.ItemName} [Esc]";
+
+        yield return new WaitForSeconds(instructionTime);
+
+        instructionPanel.SetActive(false);
+        instructionCoroutine = null;
     }
 }

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_OutlineEffect
+  m_Name: Sprite_HitFlash
   m_Shader: {fileID: -6465566751694194690, guid: c30276db001b96444a1918ff996f1994, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,6 +54,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaBlend: 0
+    - _AlphaEffectBlend: 1
+    - _AlphaRatio: 1
     - _HitEffect: 1
     - _HitEffectBlend: 0
     m_Colors:
