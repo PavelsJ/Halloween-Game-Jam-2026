@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class BlockMoveInteraction : Interactable
 {
-    [SerializeField] Collider2D boxCollider;
-    
     private bool isDragging;
     private Vector3 dragOffset;
 
@@ -16,9 +14,12 @@ public class BlockMoveInteraction : Interactable
             
             if (parentBlock != null)
                 parentBlock.BringToFront();
-            
-            if (boxCollider != null)
-                boxCollider.enabled = false;
+
+            Collider2D col = parentBlock.GetGround();
+            if (col != null) col.enabled = false;
+
+            MotionEffect motionEffect = parentBlock.GetMotion();
+            if (motionEffect != null) motionEffect.StopMotion();
         }
 
         parentBlock.transform.position = worldPos + dragOffset;
@@ -28,8 +29,11 @@ public class BlockMoveInteraction : Interactable
     {
         isDragging = false;
         
-        if (boxCollider != null)
-            boxCollider.enabled = true;
+        Collider2D col = parentBlock.GetGround();
+        if (col != null) col.enabled = true;
+        
+        MotionEffect motionEffect = parentBlock.GetMotion();
+        if (motionEffect != null) motionEffect.StartMotion();
         
         base.Release();
     }

@@ -45,8 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeOnAwake: 1
-  fadeDuration: 1
+  fadeDuration: 0.5
   fadeImage: {fileID: 0}
+  loadingScreen: {fileID: 0}
+  statusText: {fileID: 0}
+  progressText: {fileID: 0}
+  progressBar: {fileID: 0}
+  minimumLoadingTime: 2
+  progressSpeed: 30
 --- !u!1 &2821528819921964336
 GameObject:
   m_ObjectHideFlags: 0

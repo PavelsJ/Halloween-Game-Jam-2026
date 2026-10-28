@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MotionEffect : MonoBehaviour
 {
+    public bool playOnAwake = true;
+    
     [Header("Movement")]
     [SerializeField] private float amplitude = 0.1f;
     [SerializeField] private float cycleDuration = 4f;
@@ -17,19 +19,28 @@ public class MotionEffect : MonoBehaviour
     
     private IEnumerator Start()
     {
-        yield return null;
+        if (!playOnAwake) yield break;
         
+        yield return null;
+
+        StartMotion();
+    }
+
+    public void StartMotion()
+    {
         startY = transform.position.y;
         timer = Random.Range(0f, cycleDuration);
         
         StartCoroutine(MoveRoutine());
         StartCoroutine(RotateRoutine());
     }
-
-    public void StartMove(bool move, bool rotate)
+    
+    public void StopMotion()
     {
-        isMoving = move;
-        isRotating = rotate;
+        startY = transform.position.y;
+        timer = Random.Range(0f, cycleDuration);
+        
+        StopAllCoroutines();
     }
 
     private IEnumerator MoveRoutine()

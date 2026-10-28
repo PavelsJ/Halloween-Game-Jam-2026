@@ -41,13 +41,16 @@ public class BlockExplodeInteraction : BlockPlayInteraction
 
     private Coroutine explodeCoroutine;
 
-    private void Start()
+    public override IEnumerator Start()
     {
-        StartCoroutine(DelayedStart());
-    }
-    
-    private IEnumerator DelayedStart()
-    {
+        yield return null;
+        
+        if (isRandom)
+        {
+            if (adSprites.Length <= 0) yield break;
+            image.sprite = adSprites[Random.Range(0, adSprites.Length)];
+        }
+        
         isCounting = false;
 
         float warningTimer = 0f;
@@ -75,7 +78,6 @@ public class BlockExplodeInteraction : BlockPlayInteraction
         isCounting = true;
         explodeCoroutine = null;
     }
-
 
     public override void Release()
     {
@@ -119,7 +121,7 @@ public class BlockExplodeInteraction : BlockPlayInteraction
         if (timer <= 0f)
         {
             isCounting = false;
-            parentBlock.gameObject.SetActive(false);
+            Explode();
         }
     }
     

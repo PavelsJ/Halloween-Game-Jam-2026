@@ -19,7 +19,7 @@ MonoBehaviour:
   sprintMultiplier: 1
   crouchSpeed: 2
   crouchMultiplier: 1
-  jumpForce: 400
+  jumpForce: 450
   jumpCount: 1
   invulnerabilityTime: 0.2
   knockbackMultiplier: 1

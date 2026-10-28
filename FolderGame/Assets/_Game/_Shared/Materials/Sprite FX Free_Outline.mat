@@ -32,9 +32,9 @@ Material:
     - _Diagonals: 1
     - _FlashAmount: 0
     - _Grow: 4
-    - _Inside: 0
+    - _Inside: 1
     - _PPU: 100
-    - _Width: 2
+    - _Width: 8
     m_Colors:
     - _FlashColor: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
