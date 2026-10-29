@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] bool spawnOnStart = true;
     [SerializeField] private GameObject firstPlatform;
     [SerializeField] private GameObject [] platforms;
+    [SerializeField] private GameObject [] objects;
 
     [Header("Spawn Interactions")]
     [SerializeField] private float spawnRadius = 2f;
@@ -22,6 +23,11 @@ public class LevelManager : MonoBehaviour
         foreach (GameObject platform in platforms)
         {
             platform.SetActive(false);
+        }
+
+        foreach (GameObject obj in objects)
+        {
+            obj.SetActive(false);
         }
     }
 
@@ -57,6 +63,13 @@ public class LevelManager : MonoBehaviour
             BlockController blockController = platform.GetComponent<BlockController>();
             if (blockController != null) StartCoroutine(SpawnPlatform(blockController));
         }
+        
+        foreach (GameObject obj in objects)
+        {
+            yield return new WaitForSeconds(spawnDelay);
+            
+            StartCoroutine(SpawnObject(obj));
+        }
     }
 
     private IEnumerator SpawnPlatform(BlockController platform)
@@ -89,6 +102,38 @@ public class LevelManager : MonoBehaviour
         platformTransform.position = targetPosition;
         platform.GetMotion().StartMotion();
         platform.GetGround().enabled = true;
+        
+        CameraManager.Instance.ShakeCamera(0.1f, 0.2f);
+    }
+    
+    private IEnumerator SpawnObject(GameObject obj)
+    {
+        if (obj == null) yield break;
+        
+        Transform platformTransform = obj.transform;
+     
+        Vector3 targetPosition = platformTransform.position;
+        Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+        Vector3 startPosition = targetPosition + new Vector3(randomOffset.x, randomOffset.y, 0f);
+
+        platformTransform.position = startPosition;
+        obj.SetActive(true);
+
+        float elapsed = 0f;
+
+        while (elapsed < returnDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / returnDuration);
+            float easedT = t * t;
+
+            platformTransform.position = Vector3.Lerp(startPosition, targetPosition, easedT);
+
+            yield return null;
+        }
+        
+        platformTransform.position = targetPosition;
+        obj.GetComponent<MotionEffect>().StartMotion();
         
         CameraManager.Instance.ShakeCamera(0.1f, 0.2f);
     }

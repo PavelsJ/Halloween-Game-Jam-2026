@@ -28,6 +28,11 @@ public class AppearEffect : MonoBehaviour
 
     private void OnEnable()
     {
+       Appear();
+    }
+
+    public void Appear()
+    {
         transform.localPosition = startPosition;
         canvasGroup.alpha = 0f;
 

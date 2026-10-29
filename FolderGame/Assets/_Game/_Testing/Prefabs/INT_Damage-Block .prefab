@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78fb683b79732048bb94b284931e7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 0
   amplitude: 0.1
   cycleDuration: 4
   rotateSpeed: 4
@@ -240,15 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c8aa2e5758f304ba8b83362bb221fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  onRelease:
-    m_PersistentCalls:
-      m_Calls: []
-  image: {fileID: 0}
-  showOutline: 0
-  damage: 10
+  damage: 999
   canShake: 1
   shakeDuration: 0.2
   shakeMagnitude: 0.2

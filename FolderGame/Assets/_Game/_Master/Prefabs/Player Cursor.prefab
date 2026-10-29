@@ -48,7 +48,7 @@ MonoBehaviour:
   previewRenderer: {fileID: 6016080393241345685}
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
   shakeMagnitude: 0.2
   defaultPreviewSprite: {fileID: -2359561063322051928, guid: 844c41ef6119b094297ee87a16879846, type: 3}
   pointPreviewSprite: {fileID: -2359561063322051928, guid: 844c41ef6119b094297ee87a16879846, type: 3}

@@ -181,7 +181,7 @@ MonoBehaviour:
   ceilingCheck: {fileID: 5392979362155901564}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1025
   maxLockTime: 10
 --- !u!114 &5939028599416588740
 MonoBehaviour:

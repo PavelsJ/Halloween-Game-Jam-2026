@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78fb683b79732048bb94b284931e7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnAwake: 1
+  playOnAwake: 0
   amplitude: 0.1
   cycleDuration: 4
   rotateSpeed: 4

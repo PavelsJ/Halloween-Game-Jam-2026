@@ -45,7 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allItemData:
-  - {fileID: 11400000, guid: a1478defcc90a164883a059d0ac0d8e6, type: 2}
+  - {fileID: 11400000, guid: 4d09fa15b70d9ab4dbe5e8b07e602078, type: 2}
+  - {fileID: 11400000, guid: 4c0cc20fc16f4a0468caf93cd448414b, type: 2}
+  - {fileID: 11400000, guid: 1a920b9c7ce1b0f4bba9d959f59c4668, type: 2}
+  - {fileID: 11400000, guid: 202819e65916ded40811c714e5d37116, type: 2}
+  - {fileID: 11400000, guid: 6222f7211fcc409428709ea889cf952b, type: 2}
+  - {fileID: 11400000, guid: 72d3220ad3cbaf240a861d67e7da3446, type: 2}
+  - {fileID: 11400000, guid: 098d0fe98fa9e6a46a570b0f97941c4a, type: 2}
+  - {fileID: 11400000, guid: a6f818e397be2494bbd27802d80cba11, type: 2}
   itemSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -55,3 +62,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  instructionTime: 5
+  instructionPanel: {fileID: 0}
+  instructionText: {fileID: 0}

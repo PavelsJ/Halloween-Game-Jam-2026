@@ -72,9 +72,6 @@ public class BlockController : MonoBehaviour
 
     private void Awake()
     {
-        if (blockText != null)
-            blockText.text = trollMessages[Random.Range(0, trollMessages.Length)];
-        
         if (outline != null)
         {
             Material newMaterial = outline.material;
@@ -95,7 +92,7 @@ public class BlockController : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(FlashCoroutine());
+        Reset();
     }
 
     private IEnumerator Start()

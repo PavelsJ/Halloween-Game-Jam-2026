@@ -58,6 +58,9 @@ public class PowerInteraction : MonoBehaviour
         
         if (other.gameObject.CompareTag("Player"))
         {
+            PlayerController controller = other.gameObject.GetComponent<PlayerController>();
+            if (controller != null)   controller.DeactivatePlayer();
+            
             InventoryManager.Instance.SaveInventory();
             CameraManager.Instance.ShakeCameraIncreasing(1, 0.5f);
             LoadManager.Instance.OpenScene(nextSceneName);

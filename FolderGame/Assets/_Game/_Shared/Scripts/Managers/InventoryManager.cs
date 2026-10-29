@@ -51,7 +51,8 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            DeleteInventorySave();
+           PlayerPrefs.DeleteAll();
+           PlayerPrefs.Save();
         }
     }
 

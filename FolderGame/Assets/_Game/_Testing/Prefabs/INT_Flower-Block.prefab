@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78fb683b79732048bb94b284931e7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnAwake: 1
+  playOnAwake: 0
   amplitude: 0.1
   cycleDuration: 4
   rotateSpeed: 4
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5d93c365eb5fb43bca07694b9e5880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerData: {fileID: 11400000, guid: a1478defcc90a164883a059d0ac0d8e6, type: 2}
+  flowerData: {fileID: 11400000, guid: 4d09fa15b70d9ab4dbe5e8b07e602078, type: 2}
   hitParticle: {fileID: 5149600861872943584, guid: b6b044ca00c5e9f4ba82dcee262dd10f, type: 3}
   hitMaterial: {fileID: 2100000, guid: 8226369e227751544ab58b7c08116555, type: 2}
   flashTime: 0.5

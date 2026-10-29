@@ -88,9 +88,7 @@ Shader "Custom/Outline_Mapping"
 
             half4 frag(Varyings i) : SV_Target
             {
-                half4 sprite = SAMPLE_TEXTURE2D(
-                    _MainTex, sampler_MainTex, i.uv
-                );
+                half4 sprite = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
 
                 if (sprite.a <= 0.001)
                     discard;
@@ -102,22 +100,14 @@ Shader "Custom/Outline_Mapping"
                 float rightDist = 1.0 - uv.x;
                 float bottomDist = uv.y;
                 float leftDist = uv.x;
-
-                // Clockwise perimeter coordinate, from 0 to 1.
-                // Top: left -> right
-                // Right: top -> bottom
-                // Bottom: right -> left
-                // Left: bottom -> top
+                
                 float perimeterPosition;
 
-                if (topDist <= rightDist &&
-                    topDist <= bottomDist &&
-                    topDist <= leftDist)
+                if (topDist <= rightDist && topDist <= bottomDist && topDist <= leftDist)
                 {
                     perimeterPosition = uv.x * 0.25;
                 }
-                else if (rightDist <= bottomDist &&
-                         rightDist <= leftDist)
+                else if (rightDist <= bottomDist && rightDist <= leftDist)
                 {
                     perimeterPosition = 0.25 + (1.0 - uv.y) * 0.25;
                 }
@@ -131,49 +121,23 @@ Shader "Custom/Outline_Mapping"
                 }
 
                 // Fixed dash count distributed around the perimeter.
-                float dashPosition = frac(
-                    perimeterPosition * _DashCount
-                    - _Time.y * _Speed
-                );
-
+                float dashPosition = frac(perimeterPosition * _DashCount- _Time.y * _Speed);
                 float dashAA = max(fwidth(dashPosition), 0.0001);
-
-                float dashMask = 1.0 - smoothstep(
-                    _DashLength - dashAA,
-                    _DashLength + dashAA,
-                    dashPosition
-                );
+                float dashMask = 1.0 - smoothstep(_DashLength - dashAA, _DashLength + dashAA, dashPosition);
 
                 // Draw the line inside the sprite edges.
-                float edgeDistance = min(
-                    min(uv.x, 1.0 - uv.x),
-                    min(uv.y, 1.0 - uv.y)
-                );
-
-               float aa = max(fwidth(edgeDistance), 0.0001);
+                float edgeDistance = min(min(uv.x, 1.0 - uv.x), min(uv.y, 1.0 - uv.y));
+                float aa = max(fwidth(edgeDistance), 0.0001);
 
                 // Keep the outer edge antialiased.
-                float outerMask = smoothstep(
-                    0.0,
-                    aa,
-                    edgeDistance
-                );
+                float outerMask = smoothstep(0.0,aa,edgeDistance);
 
                 // Fade the line gradually towards the sprite center.
-                float innerMask = 1.0 - smoothstep(
-                    max(0.0, _LineWidth - _LineBlur),
-                    _LineWidth + aa,
-                    edgeDistance
-                );
+                float innerMask = 1.0 - smoothstep(max(0.0, _LineWidth - _LineBlur),_LineWidth + aa,edgeDistance);
 
                 float lineMask = outerMask * innerMask;
                 float mask = lineMask * dashMask;
-
-                half alpha = mask
-                    * sprite.a
-                    * i.color.a
-                    * _LineColor.a
-                    * _Alpha;
+                half alpha = mask * sprite.a* i.color.a * _LineColor.a* _Alpha;
 
                 half4 result;
                 result.rgb = _LineColor.rgb * i.color.rgb * alpha;

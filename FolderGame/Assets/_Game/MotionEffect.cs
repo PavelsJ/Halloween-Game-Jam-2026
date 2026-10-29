@@ -26,10 +26,17 @@ public class MotionEffect : MonoBehaviour
         StartMotion();
     }
 
+    private void OnEnable()
+    {
+        StartMotion();
+    }
+
     public void StartMotion()
     {
         startY = transform.position.y;
         timer = Random.Range(0f, cycleDuration);
+        
+        StopAllCoroutines();
         
         StartCoroutine(MoveRoutine());
         StartCoroutine(RotateRoutine());
