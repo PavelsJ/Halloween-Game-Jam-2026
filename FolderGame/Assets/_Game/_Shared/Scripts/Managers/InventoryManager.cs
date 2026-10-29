@@ -46,16 +46,7 @@ public class InventoryManager : MonoBehaviour
 
         Instance = this;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-           PlayerPrefs.DeleteAll();
-           PlayerPrefs.Save();
-        }
-    }
-
+    
     private IEnumerator Start()
     {
         yield return null;

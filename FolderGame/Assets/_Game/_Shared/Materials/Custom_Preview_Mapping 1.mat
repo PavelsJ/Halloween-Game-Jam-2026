@@ -34,10 +34,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1
-    - _BorderBlur: 0.025
+    - _BorderBlur: 0.001
     - _BorderBlurAmount: 0.001
     - _BorderGradientWidth: 0.05
-    - _BorderWidth: 0.05
+    - _BorderWidth: 0.001
     - _Direction: 315
     - _EdgeSmoothness: 0.0365
     - _EnableExternalAlpha: 0
@@ -64,8 +64,8 @@ Material:
     m_Colors:
     - _BorderColor: {r: 0.9911022, g: 0.088655606, b: 0.036889452, a: 1}
     - _BorderInnerColor: {r: 1, g: 0.2, b: 0, a: 1}
-    - _ColorA: {r: 0, g: 0, b: 0, a: 0.50980395}
-    - _ColorB: {r: 0.9911022, g: 0.088655606, b: 0.036889452, a: 0.50980395}
+    - _ColorA: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorB: {r: 0.9911022, g: 0.088655606, b: 0.036889452, a: 0.6666667}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShoopColor: {r: 0.3, g: 0.9, b: 1, a: 1}

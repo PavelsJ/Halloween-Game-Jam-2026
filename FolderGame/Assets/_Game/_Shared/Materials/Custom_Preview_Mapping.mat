@@ -34,10 +34,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1
-    - _BorderBlur: 0.025
+    - _BorderBlur: 0.001
     - _BorderBlurAmount: 0.05
     - _BorderGradientWidth: 0.05
-    - _BorderWidth: 0.05
+    - _BorderWidth: 0.001
     - _Direction: 315
     - _EdgeSmoothness: 0.0365
     - _EnableExternalAlpha: 0

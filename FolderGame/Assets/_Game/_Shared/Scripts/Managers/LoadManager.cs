@@ -38,6 +38,17 @@ public class LoadManager : MonoBehaviour
             ClearAllSaves();
         }
         
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            OpenPreviousScene();
+        }
+
+        // 2 — следующая сцена
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            OpenNextScene();
+        }
+        
         totalTime += Time.deltaTime;
     }
     
@@ -53,13 +64,30 @@ public class LoadManager : MonoBehaviour
         loadController.LoadScene(scene);
     }
 
+    public void OpenPreviousScene()
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        if (sceneCount <= 1) return;
+
+        int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        if (previousSceneIndex < 0) previousSceneIndex = sceneCount - 1;
+
+        SaveTime();
+
+        string previousScene = SceneUtility.GetScenePathByBuildIndex(previousSceneIndex);
+        loadController.LoadScene(previousScene);
+    }
+
     public void OpenNextScene()
     {
-        SaveTime();
-        
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        if (sceneCount <= 1) return;
+
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings) return;
-        
+        if (nextSceneIndex >= sceneCount) nextSceneIndex = 0;
+
+        SaveTime();
+
         string nextScene = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
         loadController.LoadScene(nextScene);
     }

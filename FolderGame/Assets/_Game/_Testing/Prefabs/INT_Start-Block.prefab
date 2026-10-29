@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.32941177, b: 0.22352941, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 0, y: -0.2, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -800,6 +800,7 @@ MonoBehaviour:
   canvas: {fileID: 7398834470632211778}
   ground: {fileID: 1661180511566460515}
   blockText: {fileID: 3994059973832388353}
+  isRandomText: 1
   interaction:
   - {fileID: 6197155276419766091}
   - {fileID: 869991671126245473}

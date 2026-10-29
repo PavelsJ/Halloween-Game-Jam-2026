@@ -48,6 +48,7 @@ public class PlayerActions : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             UnityEngine.InputSystem.Mouse.current.WarpCursorPosition(lastValidMousePosition);
+            CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
             return;
         }
         

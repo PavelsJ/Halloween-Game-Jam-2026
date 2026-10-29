@@ -15,6 +15,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float spawnRadius = 2f;
     [SerializeField] private float spawnDelay = 0.1f;
     [SerializeField] private float returnDuration = 0.5f;
+    
+    [Header("Spawn Rate")]
+    [SerializeField] private float spawnRateStartDelay = 3f;
+    [SerializeField] private float spawnRateIncreaseDuration = 2f;
+    [SerializeField] private float minSpawnDelay = 0.01f;
+    [SerializeField] private AnimationCurve spawnRateCurve;
+    
+    private float levelStartTime;
 
     private void Awake()
     {
@@ -44,41 +52,63 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator StartLevelCoroutine()
     {
-        BlockController firstController = firstPlatform.GetComponent<BlockController>();
-        if (firstController != null) yield return StartCoroutine(SpawnPlatform(firstController));
+        levelStartTime = Time.time;
         
-        List<GameObject> shuffledPlatforms = new List<GameObject>(platforms);
-
-        for (int i = 0; i < shuffledPlatforms.Count; i++)
+        if (firstPlatform != null)
         {
-            int randomIndex = Random.Range(i, shuffledPlatforms.Count);
-
-            (shuffledPlatforms[i], shuffledPlatforms[randomIndex]) = (shuffledPlatforms[randomIndex], shuffledPlatforms[i]);
+            BlockController firstController = firstPlatform.GetComponent<BlockController>();
+            if (firstController != null) yield return StartCoroutine(SpawnPlatform(firstController));
         }
         
-        foreach (GameObject platform in shuffledPlatforms)
+        if (platforms != null && platforms.Length > 0)
         {
-            yield return new WaitForSeconds(spawnDelay);
+            List<GameObject> shuffledPlatforms = new List<GameObject>(platforms);
+
+            for (int i = 0; i < shuffledPlatforms.Count; i++)
+            {
+                int randomIndex = Random.Range(i, shuffledPlatforms.Count);
+
+                (shuffledPlatforms[i], shuffledPlatforms[randomIndex]) = (shuffledPlatforms[randomIndex], shuffledPlatforms[i]);
+            }
+        
+            foreach (GameObject platform in shuffledPlatforms)
+            {
+                yield return new WaitForSeconds(GetCurrentSpawnDelay());
+                
+                BlockController blockController = platform.GetComponent<BlockController>();
+                if (blockController != null) StartCoroutine(SpawnPlatform(blockController));
+            }
+        }
+
+        if (objects != null && objects.Length > 0)
+        {
+            List<GameObject> shuffledObjects = new List<GameObject>(objects);
+
+            for (int i = 0; i <  shuffledObjects .Count; i++)
+            {
+                int randomIndex = Random.Range(i, shuffledObjects.Count);
+
+                ( shuffledObjects[i],  shuffledObjects[randomIndex]) = ( shuffledObjects[randomIndex], shuffledObjects[i]);
+            }
+        
+            foreach (GameObject obj in shuffledObjects)
+            {
+                yield return new WaitForSeconds(GetCurrentSpawnDelay());
             
-            BlockController blockController = platform.GetComponent<BlockController>();
-            if (blockController != null) StartCoroutine(SpawnPlatform(blockController));
+                StartCoroutine(SpawnObject(obj));
+            }
         }
-        
-        List<GameObject> shuffledObjects = new List<GameObject>(objects);
+    }
+    
+    private float GetCurrentSpawnDelay()
+    {
+        float elapsed = Time.time - levelStartTime - spawnRateStartDelay;
+        if (elapsed <= 0f) return spawnDelay;
 
-        for (int i = 0; i <  shuffledObjects .Count; i++)
-        {
-            int randomIndex = Random.Range(i, shuffledObjects.Count);
+        float progress = Mathf.Clamp01(elapsed / spawnRateIncreaseDuration);
+        float curveValue = spawnRateCurve.Evaluate(progress);
 
-            ( shuffledObjects[i],  shuffledObjects[randomIndex]) = ( shuffledObjects[randomIndex], shuffledObjects[i]);
-        }
-        
-        foreach (GameObject obj in shuffledObjects)
-        {
-            yield return new WaitForSeconds(spawnDelay);
-            
-            StartCoroutine(SpawnObject(obj));
-        }
+        return Mathf.Lerp(spawnDelay, minSpawnDelay, curveValue);
     }
 
     private IEnumerator SpawnPlatform(BlockController platform)
@@ -142,8 +172,7 @@ public class LevelManager : MonoBehaviour
         }
         
         platformTransform.position = targetPosition;
-        obj.GetComponent<MotionEffect>().StartMotion();
-        
-        CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
+        MotionEffect motion = obj.GetComponent<MotionEffect>();
+        if (motion != null) motion.StartMotion();
     }
 }

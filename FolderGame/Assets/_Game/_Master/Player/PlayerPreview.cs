@@ -9,6 +9,9 @@ public class PlayerPreview : MonoBehaviour
     [SerializeField] SpriteRenderer previewRenderer;
     [SerializeField] LayerMask interactableLayer;
     private Vector3 targetPosition;
+
+    [SerializeField] private bool fixedCursor = false;
+    [SerializeField] private Transform cursorTarget;
     
     [Header("Preview Shake")]
     public float shakeMagnitude = 0.2f;
@@ -45,6 +48,12 @@ public class PlayerPreview : MonoBehaviour
 
     private void Start()
     {
+        if (fixedCursor && cursorTarget != null)
+        {
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(cursorTarget.position);
+            UnityEngine.InputSystem.Mouse.current.WarpCursorPosition(new Vector2(screenPosition.x, screenPosition.y));
+        }
+        
         ShowPreview(1);
     }
     
