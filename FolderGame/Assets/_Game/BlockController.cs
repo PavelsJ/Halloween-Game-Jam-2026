@@ -12,7 +12,9 @@ public class BlockController : MonoBehaviour
     [Header("Block Settings")]
     [SerializeField] private Canvas canvas;
     [SerializeField] private Collider2D ground;
+  
     [SerializeField] private TMP_Text blockText;
+    [SerializeField] private bool isRandomText = true;
     
     [SerializeField] private List<Interactable> interaction;
     public int LayerCount => 1;
@@ -104,7 +106,7 @@ public class BlockController : MonoBehaviour
     
     public void Reset()
     {
-        if (blockText != null)
+        if (blockText != null && isRandomText)
             blockText.text = trollMessages[Random.Range(0, trollMessages.Length)];
         
         StartCoroutine(FlashCoroutine());

@@ -64,7 +64,16 @@ public class LevelManager : MonoBehaviour
             if (blockController != null) StartCoroutine(SpawnPlatform(blockController));
         }
         
-        foreach (GameObject obj in objects)
+        List<GameObject> shuffledObjects = new List<GameObject>(objects);
+
+        for (int i = 0; i <  shuffledObjects .Count; i++)
+        {
+            int randomIndex = Random.Range(i, shuffledObjects.Count);
+
+            ( shuffledObjects[i],  shuffledObjects[randomIndex]) = ( shuffledObjects[randomIndex], shuffledObjects[i]);
+        }
+        
+        foreach (GameObject obj in shuffledObjects)
         {
             yield return new WaitForSeconds(spawnDelay);
             
@@ -103,7 +112,7 @@ public class LevelManager : MonoBehaviour
         platform.GetMotion().StartMotion();
         platform.GetGround().enabled = true;
         
-        CameraManager.Instance.ShakeCamera(0.1f, 0.2f);
+        CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
     }
     
     private IEnumerator SpawnObject(GameObject obj)
@@ -135,6 +144,6 @@ public class LevelManager : MonoBehaviour
         platformTransform.position = targetPosition;
         obj.GetComponent<MotionEffect>().StartMotion();
         
-        CameraManager.Instance.ShakeCamera(0.1f, 0.2f);
+        CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
     }
 }

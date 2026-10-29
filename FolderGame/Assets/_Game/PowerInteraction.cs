@@ -62,7 +62,7 @@ public class PowerInteraction : MonoBehaviour
             if (controller != null)   controller.DeactivatePlayer();
             
             InventoryManager.Instance.SaveInventory();
-            CameraManager.Instance.ShakeCameraIncreasing(1, 0.5f);
+            CameraManager.Instance.ShakeCameraIncreasing(0.5f, 0.5f);
             LoadManager.Instance.OpenScene(nextSceneName);
             isUsed = true;
         }
