@@ -51,11 +51,6 @@ public class LoadManager : MonoBehaviour
         
         totalTime += Time.deltaTime;
     }
-    
-    public void StartGame()
-    {
-        OpenScene("Tagged");
-    }
 
     public void OpenScene(string scene)
     {

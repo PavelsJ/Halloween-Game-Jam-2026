@@ -19,16 +19,28 @@ EditorBuildSettings:
     guid: acb8d3d3cfd0bfc41952bffbac0346c6
   - enabled: 1
     path: Assets/_Game/Levels/lvl_5.unity
-    guid: d1721376aafc1ba44a077757a083175a
+    guid: 863b11eec7fb81240b6c3309b165bb05
   - enabled: 1
     path: Assets/_Game/Levels/lvl_6.unity
-    guid: 63e2dad197dab4e4497733ab793d6ca2
+    guid: d1721376aafc1ba44a077757a083175a
   - enabled: 1
     path: Assets/_Game/Levels/lvl_7.unity
-    guid: f33d6456a68363f4c877c39f1758f994
+    guid: 63e2dad197dab4e4497733ab793d6ca2
   - enabled: 1
     path: Assets/_Game/Levels/lvl_8.unity
+    guid: f33d6456a68363f4c877c39f1758f994
+  - enabled: 1
+    path: Assets/_Game/Levels/lvl_9.unity
     guid: 99e0e2ed70a755246a556e21e9a17d0a
+  - enabled: 1
+    path: Assets/_Game/Levels/lvl_10.unity
+    guid: ab709223217036f489780e5f668fd324
+  - enabled: 1
+    path: Assets/_Game/Levels/lvl_11.unity
+    guid: 7d685e2095edf0f459d6435f18c09947
+  - enabled: 1
+    path: Assets/_Game/Levels/lvl_12.unity
+    guid: 6c1b3d6592fade841ac769072506af0f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 66092dd6f00c26a419def3abec45da0f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

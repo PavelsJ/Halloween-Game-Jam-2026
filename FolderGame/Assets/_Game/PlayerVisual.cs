@@ -58,8 +58,6 @@ public class PlayerVisual : MonoBehaviour
         
     }
     
-    
-    
     public void PlayJumpParticles()
     {
         jumpParticles.Play();

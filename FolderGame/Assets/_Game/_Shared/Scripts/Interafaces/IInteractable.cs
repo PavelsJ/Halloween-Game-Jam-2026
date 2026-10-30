@@ -11,6 +11,8 @@ public interface IInteractable
     void Release();
     
     void Cancel();
+    
+    void Move(Vector3 worldPos);
 
     void ShowInfoUI();
     

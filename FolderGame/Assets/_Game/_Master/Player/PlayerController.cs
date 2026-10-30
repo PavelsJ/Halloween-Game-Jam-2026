@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         
         onDeath.Invoke();
         
-        // GameOverManager.Instance.GameOver("LOST TO GRAVITY");
+        GameOverManager.Instance.GameOver();
     }
 
     public PlayerData GetPlayerData()

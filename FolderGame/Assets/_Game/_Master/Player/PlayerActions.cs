@@ -17,6 +17,7 @@ public class PlayerActions : MonoBehaviour
     private Camera playerCamera;
     
     private IInteractable currentInteractable;
+    private bool isRepeling = false;
 
     private void Start()
     {
@@ -27,6 +28,18 @@ public class PlayerActions : MonoBehaviour
     {
         playerController = player;
         playerStats = player.Stats;
+    }
+    
+    private void Update()
+    {
+        if (playerController == null || !playerController.isDead) return;
+        if (playerCamera == null) return;
+        
+        Vector3 screenPos = Input.mousePosition;
+        Vector3 worldPos = playerCamera.ScreenToWorldPoint(screenPos);
+        worldPos.z = 0f;
+        
+        playerPreview.UpdatePreview(worldPos);
     }
 
     public void TickUpdate()
@@ -54,6 +67,12 @@ public class PlayerActions : MonoBehaviour
         
         lastValidMousePosition = screenPos;
         playerPreview.UpdatePreview(worldPos);
+
+        if (isRepeling)
+        {
+            RepelInteractables(worldPos);
+            return;
+        }
         
         if (InputManager.Instance.PressInput)
         {
@@ -105,6 +124,39 @@ public class PlayerActions : MonoBehaviour
             playerPreview.ShakePreview(0.2f);
         }
     }
+    
+    private void RepelInteractables(Vector3 worldPos)
+    {
+        if (EventSystem.current == null) return;
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        HashSet<Transform> movedObjects = new HashSet<Transform>();
+
+        foreach (RaycastResult result in results)
+        {
+            IInteractable interactable = result.gameObject.GetComponent<IInteractable>();
+            if (interactable == null) continue;
+            
+            Interactable interactableScript = interactable as Interactable;
+            if (interactableScript == null) continue;
+
+            Transform target = interactableScript.parentBlock.transform;
+            if (target == null || !movedObjects.Add(target)) continue;
+
+            Vector3 direction = target.position - worldPos;
+            direction.z = 0f;
+
+            if (direction.sqrMagnitude < 0.001f) continue;
+            interactable.Move(target.position += direction.normalized * (Time.deltaTime * 10f));
+        }
+    }
   
     private IInteractable GetInteractable()
     {
@@ -120,11 +172,8 @@ public class PlayerActions : MonoBehaviour
 
             foreach (RaycastResult result in results)
             {
-                IInteractable interactable =
-                    result.gameObject.GetComponentInParent<IInteractable>();
-
-                if (interactable != null)
-                    return interactable;
+                IInteractable interactable = result.gameObject.GetComponent<IInteractable>();
+                if (interactable != null) return interactable;
             }
         }
         
@@ -153,5 +202,10 @@ public class PlayerActions : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void SetRepel(bool state)
+    {
+        isRepeling = state;
     }
 }

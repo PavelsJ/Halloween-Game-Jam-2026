@@ -49,9 +49,11 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 320
+  fixedCursor: 0
+  cursorTarget: {fileID: 0}
   shakeMagnitude: 0.2
-  defaultPreviewSprite: {fileID: -2359561063322051928, guid: 844c41ef6119b094297ee87a16879846, type: 3}
-  pointPreviewSprite: {fileID: -2359561063322051928, guid: 844c41ef6119b094297ee87a16879846, type: 3}
+  defaultPreviewSprite: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
+  pointPreviewSprite: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
   darkenMultiplier: 0.7
 --- !u!1 &8912712929342412747
 GameObject:
@@ -79,8 +81,8 @@ Transform:
   m_GameObject: {fileID: 8912712929342412747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.45, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0.5, y: -0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8773363744200490041}
@@ -129,7 +131,7 @@ SpriteRenderer:
   m_SortingLayerID: -1598337725
   m_SortingLayer: 3
   m_SortingOrder: 999
-  m_Sprite: {fileID: -2359561063322051928, guid: 844c41ef6119b094297ee87a16879846, type: 3}
+  m_Sprite: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

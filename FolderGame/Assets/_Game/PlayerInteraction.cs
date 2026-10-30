@@ -50,6 +50,11 @@ public class PlayerInteraction : MonoBehaviour, IInteractable
        
     }
 
+    public virtual void Move(Vector3 worldPos)
+    {
+        
+    }
+
     public virtual void ShowInfoUI()
     {
         if (showOutline) 

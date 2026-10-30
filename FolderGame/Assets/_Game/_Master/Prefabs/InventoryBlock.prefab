@@ -37485,14 +37485,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.95294124, b: 0.4431373, a: 1}
+  m_Color: {r: 1, g: 0.97408986, b: 0.6933962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3124142080202065542, guid: 9a77216fa0b17a24492e8a09042de609, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -42650,6 +42650,7 @@ MonoBehaviour:
   canvas: {fileID: 1967146163286436449}
   ground: {fileID: 0}
   blockText: {fileID: 4194536067068058636}
+  isRandomText: 1
   interaction:
   - {fileID: 6227921588061270157}
   - {fileID: 2220285788093423041}

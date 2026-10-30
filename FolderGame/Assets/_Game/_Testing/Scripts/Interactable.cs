@@ -59,6 +59,12 @@ public class Interactable : MonoBehaviour, IInteractable
         parentBlock.BringToFront();
     }
 
+    public virtual void Move(Vector3 worldPos)
+    {
+        parentBlock.GetMotion().StopMotion();
+        parentBlock.transform.position = worldPos;
+    }
+
     public virtual void ShowInfoUI()
     {
         if (showOutline) parentBlock.SetOutline(true);

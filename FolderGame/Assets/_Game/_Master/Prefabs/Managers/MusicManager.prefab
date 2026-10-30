@@ -51,7 +51,8 @@ MonoBehaviour:
   sfxSource: {fileID: 9113863209754965726}
   voiceSource: {fileID: 514949862773220670}
   audioMixer: {fileID: 24100000, guid: 49d6a54734816d84696619f8487bc7a9, type: 2}
-  gameMusic: []
+  gameMusic:
+  - {fileID: 8300000, guid: b4553abfbd75d4441bb0d9b1b72686f1, type: 3}
   sameSoundCooldown: 0.5
   soundGroups: []
   typingGroups: []
