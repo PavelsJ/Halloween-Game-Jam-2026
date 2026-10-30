@@ -4002,6 +4002,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1469303376}
     m_Modifications:
+    - target: {fileID: 2078711278943070239, guid: 14722781dbfee7242a8db59ab620601e, type: 3}
+      propertyPath: pointPreviewSprite
+      value: 
+      objectReference: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
     - target: {fileID: 3252836853071778475, guid: 14722781dbfee7242a8db59ab620601e, type: 3}
       propertyPath: m_Name
       value: Player Cursor

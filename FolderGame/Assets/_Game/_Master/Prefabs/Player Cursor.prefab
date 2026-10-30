@@ -53,7 +53,7 @@ MonoBehaviour:
   cursorTarget: {fileID: 0}
   shakeMagnitude: 0.2
   defaultPreviewSprite: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
-  pointPreviewSprite: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
+  pointPreviewSprite: {fileID: 3467672712452853582, guid: a755f6d168350164f8aabec6f4e8aa95, type: 3}
   darkenMultiplier: 0.7
 --- !u!1 &8912712929342412747
 GameObject:

@@ -3575,6 +3575,10 @@ PrefabInstance:
       propertyPath: cursorTarget
       value: 
       objectReference: {fileID: 1495983580}
+    - target: {fileID: 2078711278943070239, guid: 14722781dbfee7242a8db59ab620601e, type: 3}
+      propertyPath: pointPreviewSprite
+      value: 
+      objectReference: {fileID: -8394216542047514179, guid: b661689b2c1cf1a4983cea8003898f0d, type: 3}
     - target: {fileID: 3252836853071778475, guid: 14722781dbfee7242a8db59ab620601e, type: 3}
       propertyPath: m_Name
       value: Player Cursor
@@ -3875,7 +3879,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1441460169417487079, guid: 3b8d43d7bcfc76347b8104d56501eb21, type: 3}
       propertyPath: nextSceneName
-      value: lvl_11
+      value: lvl_12
       objectReference: {fileID: 0}
     - target: {fileID: 6551565049524378030, guid: 3b8d43d7bcfc76347b8104d56501eb21, type: 3}
       propertyPath: m_LocalPosition.x
