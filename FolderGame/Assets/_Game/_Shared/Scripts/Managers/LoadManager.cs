@@ -55,7 +55,8 @@ public class LoadManager : MonoBehaviour
     public void OpenScene(string scene)
     {
         SaveTime();
-        
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.FadeOut, Random.Range(0.8f, 1.2f));
+        MusicManager.instance.StopMusic();
         loadController.LoadScene(scene);
     }
 
@@ -70,6 +71,8 @@ public class LoadManager : MonoBehaviour
         SaveTime();
 
         string previousScene = SceneUtility.GetScenePathByBuildIndex(previousSceneIndex);
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.FadeOut, Random.Range(0.8f, 1.2f));
+        MusicManager.instance.StopMusic();
         loadController.LoadScene(previousScene);
     }
 
@@ -84,6 +87,8 @@ public class LoadManager : MonoBehaviour
         SaveTime();
 
         string nextScene = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.FadeOut, Random.Range(0.8f, 1.2f));
+        MusicManager.instance.StopMusic();
         loadController.LoadScene(nextScene);
     }
 
@@ -92,6 +97,8 @@ public class LoadManager : MonoBehaviour
         SaveTime();
         
         string currentScene = SceneManager.GetActiveScene().name;
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.FadeOut, Random.Range(0.8f, 1.2f));
+        MusicManager.instance.StopMusic();
         loadController.LoadScene(currentScene);
     }
     

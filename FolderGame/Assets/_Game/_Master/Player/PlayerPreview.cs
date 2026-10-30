@@ -78,6 +78,7 @@ public class PlayerPreview : MonoBehaviour
         
         if (InputManager.Instance.PressInput)
         {
+            MusicManager.instance.PlayInstaSound(MusicManager.SoundType.ButtonPress, Random.Range(0.8f, 1.2f));
             previewRenderer.color = new Color(darkenMultiplier, darkenMultiplier, darkenMultiplier, 1f);
         }
         else if (InputManager.Instance.ReleaseInput)
@@ -98,7 +99,11 @@ public class PlayerPreview : MonoBehaviour
         currentInteractable = interactable;
         isHoveringInteractable = currentInteractable != null;
         
-        currentInteractable?.ShowInfoUI();
+        if (currentInteractable != null)
+        {
+            MusicManager.instance.PlayRandomSound(MusicManager.SoundType.ButtonSelection, Random.Range(0.8f, 1.2f));
+            currentInteractable.ShowInfoUI();
+        }
     }
     
     private IInteractable GetInteractable(Vector3 worldPos)

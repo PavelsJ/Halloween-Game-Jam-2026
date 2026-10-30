@@ -61,7 +61,7 @@ public class PlayerActions : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             UnityEngine.InputSystem.Mouse.current.WarpCursorPosition(lastValidMousePosition);
-            CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
+            playerPreview.ShakePreview(0.2f);
             return;
         }
         
@@ -90,6 +90,7 @@ public class PlayerActions : MonoBehaviour
             else
             {
                 playerPreview.ShakePreview(0.2f);
+                MusicManager.instance.PlayInstaSound(MusicManager.SoundType.WrongButtonPress, Random.Range(0.8f, 1.2f));
             }
         }
         else if (InputManager.Instance.ReleaseInput)
@@ -122,6 +123,7 @@ public class PlayerActions : MonoBehaviour
         else
         {
             playerPreview.ShakePreview(0.2f);
+            MusicManager.instance.PlayInstaSound(MusicManager.SoundType.WrongButtonPress, Random.Range(0.8f, 1.2f));
         }
     }
     

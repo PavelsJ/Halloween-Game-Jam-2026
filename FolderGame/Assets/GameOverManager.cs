@@ -55,6 +55,8 @@ public class GameOverManager : MonoBehaviour
         if(gameOverPanel != null)
             gameOverPanel.SetActive(true);
         
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.GameOver, Random.Range(0.8f, 1.2f));
+        
         if (gameOverText != null)
             gameOverText.text = $"{updateMessages[Random.Range(0, updateMessages.Length)]}\n{loadingMessage}";
     }

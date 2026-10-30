@@ -13,6 +13,7 @@ public class CursorInteraction : MonoBehaviour
     public void MakeCursorBigger(float size)
     {
         playerCursor.localScale += Vector3.one * size;
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.PowerUp, Random.Range(0.8f, 1.2f));
     }
 
     public void MakeCursorSmaller(float size)

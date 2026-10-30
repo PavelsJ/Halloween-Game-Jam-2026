@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -122,7 +123,6 @@ public class PlayerMovement : MonoBehaviour
     private void ReadInput()
     {
         moveInput = InputManager.Instance.MoveInput;
-        isSprinting = InputManager.Instance.SprintInput && !isCroucing;
     }
     
     private void HandleMovement()
@@ -160,18 +160,21 @@ public class PlayerMovement : MonoBehaviour
         coyoteTimer = 0f;
 
         playerController.Visual.PlayJumpParticles();
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Jump, Random.Range(0.8f, 1.2f));
         rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode2D.Impulse);
     }
 
     private void HandleLanding()
     {
         playerController.Visual.PlayLandingParticles();
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Landing, Random.Range(0.8f, 1.2f));
         isJumping = false;
     }
     
     public void ApplyKnockback(Vector3 hitDirection, float knockbackForce = 4f)
     {
         if (playerController.isInvulnerable) return;
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Hurt, Random.Range(0.8f, 1.2f));
 
         if (invulnerabilityRoutine != null) StopCoroutine(invulnerabilityRoutine);
         invulnerabilityRoutine = StartCoroutine(InvulnerabilityRoutine(playerStats.InvulnerabilityTime));

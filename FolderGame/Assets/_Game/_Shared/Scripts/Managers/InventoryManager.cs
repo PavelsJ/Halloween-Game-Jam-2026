@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -172,6 +173,7 @@ public class InventoryManager : MonoBehaviour
     public void AddItem(ItemData newItem)
     {
         if (newItem == null) return;
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.ItemIncrease, Random.Range(0.8f, 1.2f));
 
         int itemIndex = items.IndexOf(newItem);
 

@@ -20,23 +20,15 @@ public class BlockExplodeInteraction : BlockPlayInteraction
     private readonly string[] trollMessages =
     {
         "Mmm, actually, try again!",
-        "Probably missed...",
-        "Close enough. Not really...",
-        "Skill issue detected...",
-        "Nice try, genius...",
-        "Error 404: Brain not found...",
-        "Press harder. I'm sure it'll help...",
         "Almost! Just kidding...",
         "Free phone? Sure, buddy...",
-        "Congratulations! You played yourself...",
-        "Certified genius moment...",
-        "I admire your confidence...",
-        "Wow. That was embarrassing...",
         "Keep clicking. Something might happen...",
-        "FAILED......",
-        "The definition of insanity is trying this again...",
-        "Achievement unlocked: Professional Button Presser...",
-        "Surprise! Nothing happened..."
+        "Downloading questionable files...",
+        "Surprise! Nothing happened...",
+        "Warning: Suspicious activity detected.",
+        "Background process started...",
+        "The definition of insanity is...",
+        "I'll give you an extra life if you tell me programmer's mum name..."
     };
 
     private Coroutine explodeCoroutine;
@@ -114,6 +106,7 @@ public class BlockExplodeInteraction : BlockPlayInteraction
     {
         IsUsed = true;
         CameraManager.Instance.ShakeCamera(0.2f, 0.2f);
+        MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Explosion, Random.Range(0.8f, 1.2f));
         parentBlock.gameObject.SetActive(false);
     }
 

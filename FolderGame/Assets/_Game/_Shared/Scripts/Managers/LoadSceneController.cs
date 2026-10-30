@@ -51,6 +51,8 @@ public class LoadSceneController : MonoBehaviour
     {
         if (loadingScreen != null)
             loadingScreen.SetActive(false);
+        
+        MusicManager.instance.StartMusic();
 
         if (fadeOnAwake)
         {

@@ -28,17 +28,29 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private List<TypingGroup> typingGroups;
     private Dictionary<TypingType, AudioClip[]> typingDictionary;
     
+    private Coroutine musicRoutine;
+    
     public enum SoundType
     {
         ButtonPress,
-        WrongButtonPress,
         ButtonSelection,
+        WrongButtonPress,
         
         ItemIncrease,
         ItemDecrease,
         
-        OpenTab,
-        CloseTab,
+        Move,
+        Jump,
+        Landing,
+        Hurt,
+        
+        FadeIn,
+        FadeOut,
+        
+        Explosion,
+        Spawn,
+        GameOver,
+        PowerUp,
     }
     
     public enum TypingType
@@ -65,15 +77,25 @@ public class MusicManager : MonoBehaviour
     private void Start()
     {
         ApplySavedVolumes();
-        
+    }
+
+    public void StartMusic()
+    {
         if (gameMusic.Length == 0) return;
-        
-        StartCoroutine(FadeInMusic(gameMusic[0], 1f));
+        if (musicRoutine != null) StopCoroutine(musicRoutine);
+        musicRoutine = StartCoroutine(FadeInMusic(gameMusic[0], 1f));
+    }
+
+    public void StopMusic()
+    {
+        if (gameMusic.Length == 0) return;
+        if (musicRoutine != null) StopCoroutine(musicRoutine);
+        musicRoutine = StartCoroutine(FadeOutMusic( 1f));
     }
     
-    private IEnumerator FadeInMusic(AudioClip clip, float fadeTime)
+    public IEnumerator FadeInMusic(AudioClip clip, float fadeTime)
     {
-        float targetVolume = musicSource.volume;
+        float targetVolume = 1;
         
         musicSource.clip = clip;
         musicSource.volume = 0f;
@@ -88,6 +110,22 @@ public class MusicManager : MonoBehaviour
         }
 
         musicSource.volume = targetVolume;
+    }
+    
+    public IEnumerator FadeOutMusic( float fadeTime)
+    {
+        float startVolume = musicSource.volume;
+
+        float t = 0f;
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume, 0f, t / fadeTime);
+            yield return null;
+        }
+
+        musicSource.volume = 0f;
+        musicSource.Stop();
     }
      
     private void ApplySavedVolumes()
@@ -165,6 +203,18 @@ public class MusicManager : MonoBehaviour
         sfxSource.pitch = pitch;
         sfxSource.PlayOneShot(clip);
     }
+    
+    public void PlayInstaSound(SoundType type, float pitch = 1f)
+    {
+        AudioClip clip = GetRandomClip(type);
+        if (clip == null) return;
+
+        RegisterSound(type);
+
+        sfxSource.pitch = pitch;
+        sfxSource.PlayOneShot(clip);
+    }
+
     
     private AudioClip GetRandomClip(SoundType type)
     {

@@ -94,7 +94,6 @@ public class LevelManager : MonoBehaviour
             foreach (GameObject obj in shuffledObjects)
             {
                 yield return new WaitForSeconds(GetCurrentSpawnDelay());
-            
                 StartCoroutine(SpawnObject(obj));
             }
         }
@@ -114,6 +113,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator SpawnPlatform(BlockController platform)
     {
         if (platform == null) yield break;
+        MusicManager.instance.PlayInstaSound(MusicManager.SoundType.Spawn, Random.Range(0.8f, 1.2f));
         
         Transform platformTransform = platform.transform;
         platform.GetGround().enabled = false;
@@ -148,6 +148,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator SpawnObject(GameObject obj)
     {
         if (obj == null) yield break;
+        MusicManager.instance.PlayInstaSound(MusicManager.SoundType.Spawn, Random.Range(0.8f, 1.2f));
         
         Transform platformTransform = obj.transform;
      
