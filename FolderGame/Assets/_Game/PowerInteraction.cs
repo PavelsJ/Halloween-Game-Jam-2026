@@ -4,7 +4,7 @@ using UnityEngine;
 public class PowerInteraction : MonoBehaviour
 {
     [SerializeField] private string nextSceneName;
-    private bool isUsed;
+    internal bool isUsed;
     
     [Header("Block Visual")]
     [SerializeField] private Material hitMaterial;
@@ -52,7 +52,7 @@ public class PowerInteraction : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (isUsed) return;
         

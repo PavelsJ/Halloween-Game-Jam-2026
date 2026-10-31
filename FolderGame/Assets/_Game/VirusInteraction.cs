@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class VirusInteraction: MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
 
     [Header("Virus Shake")] 
     [SerializeField] private bool canShake = true;
@@ -20,7 +20,7 @@ public class VirusInteraction: MonoBehaviour
         originalPosition = transform.localPosition;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

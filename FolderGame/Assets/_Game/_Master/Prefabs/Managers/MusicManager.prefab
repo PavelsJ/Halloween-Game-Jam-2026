@@ -104,6 +104,9 @@ MonoBehaviour:
   - type: 19
     clips:
     - {fileID: 8300000, guid: 94eb4880a33b27344b441aac2f3c3a1c, type: 3}
+  - type: 18
+    clips:
+    - {fileID: 8300000, guid: 2a68f039f11f4f348be8ad736d8e33ee, type: 3}
   typingGroups: []
 --- !u!1 &5036094650771245501
 GameObject:

@@ -885,7 +885,37 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sheet_frame_3_0: -3666585139475480235
+      sheet_frame_3_1: -2894898693091423477
+      sheet_frame_3_10: -7432489272972065253
+      sheet_frame_3_11: -9059081241153573737
+      sheet_frame_3_12: -3570910217144321194
+      sheet_frame_3_13: 2587215612034900670
+      sheet_frame_3_14: -3582064429680059352
+      sheet_frame_3_15: -8933746468005311495
+      sheet_frame_3_16: -8615331505092430838
+      sheet_frame_3_17: 7573145828556586517
+      sheet_frame_3_18: 5057490394464748737
+      sheet_frame_3_19: -4579314452261635659
+      sheet_frame_3_2: -5482899267221503234
+      sheet_frame_3_20: -4807458076331476339
+      sheet_frame_3_21: 6996867736430612256
+      sheet_frame_3_22: 3221545160863031165
+      sheet_frame_3_23: 8957624067813134957
+      sheet_frame_3_24: 6463880201599446140
+      sheet_frame_3_25: 7292022852549305072
+      sheet_frame_3_26: -7127318424769520857
+      sheet_frame_3_27: 587097109718347151
+      sheet_frame_3_28: -1897053569948465333
+      sheet_frame_3_29: 2516712725911122568
+      sheet_frame_3_3: -3761050954635510940
+      sheet_frame_3_4: -1795517945766609759
+      sheet_frame_3_5: -6276164709739001025
+      sheet_frame_3_6: 3508011981759655967
+      sheet_frame_3_7: 1935405948077380908
+      sheet_frame_3_8: 5599193032862562784
+      sheet_frame_3_9: 8143323142558345297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

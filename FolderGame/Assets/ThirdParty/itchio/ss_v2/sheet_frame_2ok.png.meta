@@ -885,7 +885,37 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sheet_frame_2ok_0: 6860947270143343306
+      sheet_frame_2ok_1: -5921859589298159799
+      sheet_frame_2ok_10: -5435638713794272817
+      sheet_frame_2ok_11: -6042547161565132416
+      sheet_frame_2ok_12: 5926840706192193969
+      sheet_frame_2ok_13: 4591256506146691314
+      sheet_frame_2ok_14: 4546362583107737312
+      sheet_frame_2ok_15: 7193501713872920128
+      sheet_frame_2ok_16: 5083265537243279089
+      sheet_frame_2ok_17: -2943154337020622359
+      sheet_frame_2ok_18: 7925556199089147130
+      sheet_frame_2ok_19: -7841275559205360930
+      sheet_frame_2ok_2: 5363057044680073236
+      sheet_frame_2ok_20: -5762420176805879596
+      sheet_frame_2ok_21: -3393935015975050690
+      sheet_frame_2ok_22: 668007103965769458
+      sheet_frame_2ok_23: 8026143905876346823
+      sheet_frame_2ok_24: 6852393627148532673
+      sheet_frame_2ok_25: 4074262460345130233
+      sheet_frame_2ok_26: 7132779991347716052
+      sheet_frame_2ok_27: 7480273266513689349
+      sheet_frame_2ok_28: 8776899125056752761
+      sheet_frame_2ok_29: -107303006739326104
+      sheet_frame_2ok_3: 3201662853093430782
+      sheet_frame_2ok_4: 7977530561016419288
+      sheet_frame_2ok_5: 6668437180928729739
+      sheet_frame_2ok_6: -8956710271310799130
+      sheet_frame_2ok_7: 6759260756667306496
+      sheet_frame_2ok_8: 6834716246931113929
+      sheet_frame_2ok_9: -838384852387616188
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
