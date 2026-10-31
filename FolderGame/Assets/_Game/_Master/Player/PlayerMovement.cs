@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float timeSinceLastJump;
     private float timeSinceLastMove;
+    
+    protected float footstepTimer;
+    protected float footstepInterval = 0.2f;
 
     private Coroutine knockbackRoutine;
     private Coroutine invulnerabilityRoutine;
@@ -140,8 +143,40 @@ public class PlayerMovement : MonoBehaviour
 
         horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, targetVelocity, acceleration * Time.deltaTime);
         rb.linearVelocity = new Vector3(horizontalVelocity.x, velocity.y, horizontalVelocity.z);
+        
+        float movementDirection = Vector3.Dot(horizontalVelocity.normalized, transform.right);
+        
+        if (Mathf.Abs(movementDirection) > 0.1f)
+        {
+            int moveDirection = movementDirection > 0f ? 1 : -1;
+
+            playerController.Visual.Flip(moveDirection);
+            playerController.Visual.SetMove(moveDirection);
+
+            FootSteps();
+        }
+        else
+        {
+            playerController.Visual.SetMove(0);
+        }
     }
-    
+
+    private void FootSteps()
+    {
+        if (isGrounded)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Footsteps, Random.Range(0.9f, 1.1f));
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f;
+        }
+    }
    
     private void HandleJump()
     {
@@ -160,14 +195,20 @@ public class PlayerMovement : MonoBehaviour
         coyoteTimer = 0f;
 
         playerController.Visual.PlayJumpParticles();
+        playerController.Visual.SetJump(true);
+        
         MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Jump, Random.Range(0.8f, 1.2f));
+        
         rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode2D.Impulse);
     }
 
     private void HandleLanding()
     {
         playerController.Visual.PlayLandingParticles();
+        playerController.Visual.SetJump(false);
+        
         MusicManager.instance.PlayRandomSound(MusicManager.SoundType.Landing, Random.Range(0.8f, 1.2f));
+        
         isJumping = false;
     }
     
@@ -237,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetKinematic(bool kinematic)
     {
         rb.isKinematic = kinematic;
-        rb.gravityScale = kinematic ? 0f : 1f;
+        rb.gravityScale = kinematic ? 0f : 2f;
     }
     
     private void OnDrawGizmosSelected()

@@ -68,13 +68,14 @@ public class ItemSlot : MonoBehaviour
     public virtual void DeleteSlot()
     {
         if (GetItemData() == null) return;
-        
+
         if (Selection.IsSelected())
         {
             InventoryManager.Instance.DeselectSlot();
-            Selection.PlayConsumableParticles();
             Selection.SetSelected(false);
         }
+
+        ClearSlot();
     }
     
     public void ClearSlot()

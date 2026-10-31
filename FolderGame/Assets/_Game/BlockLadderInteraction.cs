@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BlockLadderInteraction : BlockCloseInteraction
@@ -9,8 +10,10 @@ public class BlockLadderInteraction : BlockCloseInteraction
     private int currentLadderAmount;
     private Vector3 originPos;
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitForSeconds(0.2f);
+        
         currentLadderAmount = ladderAmount;
         originPos = parentBlock.transform.localPosition;
     }

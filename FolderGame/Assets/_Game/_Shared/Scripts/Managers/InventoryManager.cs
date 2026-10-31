@@ -195,6 +195,22 @@ public class InventoryManager : MonoBehaviour
             return;
         }
     }
+    
+    public void RemoveItem()
+    {
+        foreach (var slot in itemSlots)
+        {
+            if (slot !=null && slot.IsFilled)
+            {
+                slot.DeleteSlot();
+
+                if (selectedSlot == slot)
+                    selectedSlot = null;
+                
+                return;
+            }
+        }
+    }
 
     public void RemoveItem(ItemSlot slot)
     {
@@ -237,5 +253,29 @@ public class InventoryManager : MonoBehaviour
 
         instructionPanel.SetActive(false);
         instructionCoroutine = null;
+    }
+
+    public void RemoveAllItems()
+    {
+        foreach (ItemSlot slot in itemSlots)
+        {
+           RemoveItem(slot);
+        }
+    }
+    
+    public bool IsInventoryEmpty()
+    {
+        foreach (ItemSlot slot in itemSlots)
+        {
+            if (slot != null && slot.IsFilled)
+                return false;
+        }
+
+        return true;
+    }
+
+    public int GetItemCount()
+    {
+        return items.Count;
     }
 }

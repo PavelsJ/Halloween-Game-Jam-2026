@@ -11,7 +11,7 @@ public class PowerInteraction : MonoBehaviour
     [SerializeField] private float flashTime = 0.5f;
     [SerializeField] private AnimationCurve flashCurve;
     
-    private SpriteRenderer renderer;
+    [SerializeField] private SpriteRenderer renderer;
     private Material currentMaterial;
     
     private IEnumerator Start()

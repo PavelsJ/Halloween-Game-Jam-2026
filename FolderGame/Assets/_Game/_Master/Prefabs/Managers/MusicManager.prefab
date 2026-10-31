@@ -53,6 +53,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 49d6a54734816d84696619f8487bc7a9, type: 2}
   gameMusic:
   - {fileID: 8300000, guid: b4553abfbd75d4441bb0d9b1b72686f1, type: 3}
+  - {fileID: 8300000, guid: 1806304d3e0c89e4daddb9781d288cda, type: 3}
   sameSoundCooldown: 0.5
   soundGroups:
   - type: 0
@@ -94,6 +95,15 @@ MonoBehaviour:
   - type: 14
     clips:
     - {fileID: 8300000, guid: e169c31cbc1e7244a807d704e246907d, type: 3}
+  - type: 16
+    clips:
+    - {fileID: 8300000, guid: e0196c775f4aa9649a5047832556d857, type: 3}
+  - type: 15
+    clips:
+    - {fileID: 8300000, guid: a2a66853073f09d43a65b07d592221f6, type: 3}
+  - type: 19
+    clips:
+    - {fileID: 8300000, guid: 94eb4880a33b27344b441aac2f3c3a1c, type: 3}
   typingGroups: []
 --- !u!1 &5036094650771245501
 GameObject:

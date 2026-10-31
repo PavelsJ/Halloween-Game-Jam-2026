@@ -42650,7 +42650,7 @@ MonoBehaviour:
   canvas: {fileID: 1967146163286436449}
   ground: {fileID: 0}
   blockText: {fileID: 4194536067068058636}
-  isRandomText: 1
+  isRandomText: 0
   interaction:
   - {fileID: 6227921588061270157}
   - {fileID: 2220285788093423041}

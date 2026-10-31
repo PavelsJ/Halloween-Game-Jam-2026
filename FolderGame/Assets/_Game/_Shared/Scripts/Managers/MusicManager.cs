@@ -15,7 +15,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
 
     [Header("Music")]
-    [SerializeField] private AudioClip[] gameMusic;
+    public AudioClip[] gameMusic;
 
     [Header("SFX Sounds")] 
     [SerializeField] private float sameSoundCooldown = 0.5f;
@@ -51,6 +51,13 @@ public class MusicManager : MonoBehaviour
         Spawn,
         GameOver,
         PowerUp,
+        
+        Attack,
+        Footsteps,
+        Virus,
+        Death,
+        
+        Tension,
     }
     
     public enum TypingType
@@ -84,6 +91,13 @@ public class MusicManager : MonoBehaviour
         if (gameMusic.Length == 0) return;
         if (musicRoutine != null) StopCoroutine(musicRoutine);
         musicRoutine = StartCoroutine(FadeInMusic(gameMusic[0], 1f));
+    }
+    
+    public void StartBossMusic()
+    {
+        if (gameMusic.Length == 0) return;
+        if (musicRoutine != null) StopCoroutine(musicRoutine);
+        musicRoutine = StartCoroutine(FadeInMusic(gameMusic[1], 1f));
     }
 
     public void StopMusic()

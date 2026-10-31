@@ -3785,12 +3785,60 @@ PrefabInstance:
     m_TransformParent: {fileID: 1786898605}
     m_Modifications:
     - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
-      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1801172720}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4285120581938593336}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784178002518856612, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862939002656707444, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 5200910092423455753, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
       propertyPath: m_Name
       value: INT_Start-Block
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197155276419766091, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197155276419766091, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1801172720}
+    - target: {fileID: 6197155276419766091, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197155276419766091, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+      propertyPath: onRelease.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7108257994149055257, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3837,6 +3885,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+--- !u!1 &4285120581938593336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5200910092423455753, guid: 6dc23e4c8afe6ee49a6724a4229cd8c7, type: 3}
+  m_PrefabInstance: {fileID: 4285120581938593335}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4376486230711194766 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4585527602938906485, guid: 1df4bd6531480d74ea6db9ee3535e116, type: 3}

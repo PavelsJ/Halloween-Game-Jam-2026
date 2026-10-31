@@ -34,13 +34,19 @@ EditorBuildSettings:
     guid: 99e0e2ed70a755246a556e21e9a17d0a
   - enabled: 1
     path: Assets/_Game/Levels/lvl_10.unity
-    guid: ab709223217036f489780e5f668fd324
+    guid: 6c1b3d6592fade841ac769072506af0f
   - enabled: 1
     path: Assets/_Game/Levels/lvl_11.unity
-    guid: 7d685e2095edf0f459d6435f18c09947
+    guid: ab709223217036f489780e5f668fd324
   - enabled: 1
     path: Assets/_Game/Levels/lvl_12.unity
-    guid: 6c1b3d6592fade841ac769072506af0f
+    guid: 7d685e2095edf0f459d6435f18c09947
+  - enabled: 1
+    path: Assets/_Game/Levels/lvl_13.unity
+    guid: 4fda6581c36419b49b5c5510f19bb61e
+  - enabled: 1
+    path: Assets/_Game/Levels/lvl_14.unity
+    guid: 19b31b91a2ff3ec4c971a10f6f98556d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 66092dd6f00c26a419def3abec45da0f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

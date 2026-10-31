@@ -113,7 +113,13 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (eventData.pointerEnter != null)
         {
             IItemReceiver receiver = eventData.pointerEnter.GetComponent<IItemReceiver>();
-            if (receiver != null) receiver.ReceiveItem(slotController);
+
+            if (receiver != null)
+            {
+                receiver.ReceiveItem(slotController);
+                slotController.Selection.PlayConsumableParticles();
+                return;
+            }
         }
 
         if (returnRoutine != null) StopCoroutine(returnRoutine);
@@ -133,6 +139,7 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime;
+            
             slotController.dragOffset = Vector2.Lerp(startOffset, targetOffset, elapsed / duration);
             slotController.UpdateCombinedOffset();
             yield return null;
